@@ -3,8 +3,8 @@ library("shiny")
 library("plotly")
 
 shinyUI(
-  navbarPage("Kickstarter information",
-             theme = ("style.css"),
+  navbarPage(img(src='ar.png', width = "80px", height = "60px",align = "top"),
+             includeCSS("style.css"),
              
              tabPanel("Home", 
                       titlePanel("Home"),
@@ -23,7 +23,12 @@ shinyUI(
                         ),
                         
                         mainPanel(
-                          p("test")
+                          tags$p("test"),
+                          tags$div(class="header", checked=NA,
+                                   tags$p("Ready to take the Shiny tutorial? If so"),
+                                   tags$a(href="shiny.rstudio.com/tutorial", "Click Here!")
+                          )
+                          
                         )
                       )
              ),
