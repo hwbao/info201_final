@@ -15,12 +15,9 @@ shinyServer(function(input, output) {
     )
   })
   
-  output$pie <- renderPlotly({ 
-    return(build_pie(df, input$state, input$county))
-  }) 
+  #output$pie <- renderPlotly({ 
+    
+  #}) 
   
-  output$scatter <- renderPlotly({
-    return(build_scatter(df, input$poverty, input$condition))
-  })
   
 })
