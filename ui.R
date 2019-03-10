@@ -6,7 +6,7 @@ library("plotly")
 shinyUI(
   # Create a well organized page with navbarPage
   navbarPage("Kickstarter information",
-             theme = ("ui.css"),
+             theme = ("style.css"),
              
              # Create the third page that contains the information about backer
              tabPanel("Backer's Investment Information", 
@@ -24,9 +24,15 @@ shinyUI(
                                         
                                       )
                           )
+                        ),
+                        
+                        mainPanel(
+                          p("test")
                         )
                       )
              )
+             
+
   )
 )
 
