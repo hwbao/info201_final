@@ -57,9 +57,9 @@ shinyUI(
                       )
              ),
              #-------------------------------------------------------------#
-             tabPanel("Countries", 
+             tabPanel("Goals", 
                       # Give the page a title
-                      titlePanel("Countries"),
+                      titlePanel("Average Goals"),
                       # Create The side bar layout
                       sidebarLayout(
                         # Set all the choices that user can make, and how
@@ -99,13 +99,11 @@ shinyUI(
                         ),
                         
                         mainPanel(
-                          p("test")
+                          p("test")  #plotly_graph
                         )
                       )
              )
              #-------------------------------------------------------------#
-             
-
   )
 )
 
