@@ -3,7 +3,7 @@ library(dplyr)
 library(plotly)
 
 # Read the data about kickstarter and convert it into a dataframe
-kickstarter <- read.csv("data/ks_projects_201801.csv")
+kickstarter <- read.csv("data/ks_projects_201801.csv", stringsAsFactors = F)
 
 project_name <- "Art"
 # Function to draw the graph for average amount of money 
@@ -31,16 +31,11 @@ draw_backer_project_relationship <- function(project_name) {
                           name = select_project$category) %>%
                    layout(yaxis = list(title = "average pledged"))
 }  
+
+
+
 temp <- draw_backer_project_relationship("Art")
 ################################################################################  
-  
-  
-  
-  
-  
-  
-  
-  
   
   draw_graph <- plot_ly(type = "sankey",
                         domain = list(
