@@ -3,7 +3,7 @@ library(dplyr)
 library(plotly)
 
 # Read the data about kickstarter and convert it into a dataframe
-kickstarter <- read.csv("data/ks_projects_201801.csv")
+kickstarter <- read.csv("./data/ks_projects_201801.csv")
 data.frame(kickstarter)
 
 project_name <- "Art"
