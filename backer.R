@@ -5,6 +5,7 @@ library(plotly)
 # Read the data about kickstarter and convert it into a dataframe
 kickstarter <- read.csv("data/ks_projects_201801.csv")
 
+project_name <- "Art"
 # Function to draw the graph for average amount of money 
 # that a backer would give to a project in a given specific category
 draw_backer_project_relationship <- function(project_name) {
@@ -16,19 +17,22 @@ draw_backer_project_relationship <- function(project_name) {
     group_by(category) %>% 
     summarize(total_pledged = sum(pledged), total_backers = sum(backers)) %>% 
     mutate(avg = round(total_pledged / total_backers), 
-           description = paste0(category, "'s average pledge from each backer is ", avg)
+           description = paste0(category,
+                                "'s average pledge from each backer is ",
+                                avg)
            )
   
   
   draw_each_sub <- plot_ly(select_project,
-                          x = ~category,
-                          y = ~avg,
+                          x = select_project$category,
+                          y = select_project$avg,
                           text = ~description,
-                          type = "bar") %>%
-                   layout(yaxis = list(title = "average_pledged"), barmode = 'stack')
+                          type = "bar",
+                          name = select_project$category) %>%
+                   layout(yaxis = list(title = "average pledged"))
 }  
-  
-  
+temp <- draw_backer_project_relationship("Art")
+################################################################################  
   
   
   
@@ -68,7 +72,6 @@ draw_backer_project_relationship <- function(project_name) {
       xaxis = list(showgrid = F, zeroline = F),
       yaxis = list(showgrid = F, zeroline = F)
     )
-  
   
   #return(select_project)
 # }
