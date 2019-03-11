@@ -2,9 +2,14 @@
 library("shiny")
 library("plotly")
 
+source("backer.R")
+source("chart#3.R")
+source("average goal.R")
+
 shinyUI(
   navbarPage(img(src='ar.png', width = "80px", height = "60px",align = "top"),
-             includeCSS("style.css"),
+             #includeCSS("style.css"),
+             tags$head(tags$link(href = "style.css", rel = "stylesheet")),
              
              tabPanel("Home", 
                       titlePanel("Home"),
@@ -35,24 +40,24 @@ shinyUI(
              
              #--------------------------Success Rate----------------#
              tabPanel("Success Rate", 
-                      # Give the page a title
                       titlePanel("Success Rate"),
-                      # Create The side bar layout
                       sidebarLayout(
-                        # Set all the choices that user can make, and how
-                        # each button work, and their names
                         sidebarPanel(
-                          # The user input of different type of project
-                          selectInput("type_project",
-                                      label = "Choose the Type of project",
+                          selectInput("rate_main_category",
+                                      label = "Please Choose the Category You are interested in",
                                       choices = list(
-                                        
+                                        "All Category" = "main_category"
                                       )
+                          ),
+                          sliderInput("year", 
+                                      label = "Please Choose the <em>Year</em> You are interested in",
+                                      min = 2009, max = 2017,
+                                      value = 2009
                           )
                         ),
                         
                         mainPanel(
-                          p("test")
+                          plotlyOutput("rate")
                         )
                       )
              ),
