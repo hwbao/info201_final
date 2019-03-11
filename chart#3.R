@@ -17,23 +17,20 @@ category_data <- ks_data %>%
   #format(as.Date(category_data$deadline, format="%Y-%m-%d"), "%Y")
 
 find_rate <- function(data, input_category, input_year){
-  col_name <- deparse(substitute(input_category))
   modified_df <- data %>% 
-    select(col_name, state, deadline) %>% 
+    select(input_category, state, deadline) %>% 
     mutate(deadline = substring(deadline, 1, 4)) %>% 
-    group_by(col_name) %>% 
+    group_by_(input_category) %>% 
     filter(deadline == input_year) %>% 
     mutate(total_count = n()) %>% 
     filter(state == "successful") %>%
     mutate(success = n()) %>% 
     mutate(success_rate = round(success / total_count * 100, 1)) %>% 
-    select(col_name, success_rate) %>% 
-    unique(by = col_name)
+    select(input_category, success_rate) %>% 
+    unique(by = input_category)
 }
 
-test_df <- find_rate(ks_data, "main_category", "2017")
-
-
+test_df <- find_rate(ks_data, "main_category", "2016")
 
 p <- plot_ly(
   main_cat,
