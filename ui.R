@@ -60,18 +60,11 @@ shinyUI(
              ),
              #-------------------------------------------------------------#
              tabPanel("Goals", 
-                      # Give the page a title
                       titlePanel("Average Goals"),
-                      # Create The side bar layout
                       sidebarLayout(
-                        # Set all the choices that user can make, and how
-                        # each button work, and their names
                         sidebarPanel(
-                          # The user input of different type of project
                           selectInput("main_category",
-                                      label = "Please Choose the Category You are interested in",
-                                      choices = list(
-                                        "All Category" = "main_category"
+                          
                                       )
                           )
                         ),
@@ -85,14 +78,9 @@ shinyUI(
              
              #----------------------------------------Celia----------------#
              tabPanel("Backer's Investment", 
-                      # Give the page a title
                       titlePanel("Backer's Investment Information"),
-                      # Create The side bar layout
                       sidebarLayout(
-                        # Set all the choices that user can make, and how
-                        # each button work, and their names
                         sidebarPanel(
-                          # The user input of different type of project
                           selectInput("type_project",
                                       label = "Choose the Type of project",
                                       choices = list(
@@ -102,7 +90,7 @@ shinyUI(
                         ),
                         
                         mainPanel(
-                          p("test")  #plotly_graph
+                          p("test")
                         )
                       )
              )
