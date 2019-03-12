@@ -3,6 +3,7 @@ library("plotly")
 library("dplyr")
 library("lubridate")
 
+# use for test
 cat_num <- ks_data %>% 
   select(main_category, state, deadline, backers) %>% 
   mutate(deadline = as.numeric(substring(deadline, 1, 4))) %>% 
@@ -12,6 +13,7 @@ cat_num <- ks_data %>%
   filter(state == "successful") %>% 
   mutate(num_count = n())
 
+# rate for each main category
 find_rate <- function(data, input_category, input_year){
   modified_df <- data %>% 
     select(input_category, state, deadline, backers) %>% 
@@ -29,6 +31,7 @@ find_rate <- function(data, input_category, input_year){
 
 test_df <- find_rate(ks_data, "main_category", 2016)
 
+# every years success rate for each sub category
 find_line <- function(data, sub_category){
   modified_df <- data %>% 
     select(category, state, deadline) %>% 
@@ -47,23 +50,41 @@ find_line <- function(data, sub_category){
 
 test_line <- find_line(ks_data, "Drinks")
 
+# interactive babble chart, color needs adjust
 p1 <- plot_ly(
   test_df,
-  x = ~total_projects,
-  y = ~success_rate,
-  name = "Race chart",
+  x = ~success_rate,
+  y = ~total_projects,
+  name = ~main_category,
   type = "scatter",
   mode = "markers",
   size = ~total_backers,
   color = ~main_category,
   colors = "Paired",
-  marker = list(opacity = 0.5, sizemode = "diameter")) %>% 
-  layout(title = "Gender Gap in Earnings per University",
-         xaxis = list(showgrid = FALSE),
-         yaxis = list(showgrid = FALSE),
-         showlegend = FALSE)
+  sizes = c(min(test_df$total_backers) / 300, max(test_df$total_backers) / 300),
+  marker = list(symbol = "circle", opacity = 0.7, sizemode = "area",
+                line = list(width = 2, color = '#FFFFFF')),
+  hoverinfo = "text",
+  lengendgroup = ~main_category,
+  text = ~paste("Category:", main_category,
+                "<br>Success Rate:", success_rate,
+                "<br>Amount Projects:", total_projects,
+                '<br>Amount Backers:', total_backers)) %>% 
+  layout(title = "Success Rates vs. Amount Projects of Each Category",
+         xaxis = list(title = 'Success Rates (%)',
+                      range = c(0, 110),
+                      zerolinewidth = 1,
+                      ticklen = 2,
+                      gridwidth = 2),
+         yaxis = list(title = 'Amount Projects',
+                      ticklen = 2,
+                      gridwidth = 2),
+         legend = list(font = list(size = 12)),
+         paper_bgcolor = '#010402',
+         plot_bgcolor = '#010402')
 p1
 
+# unfinished line chart
 p2 <- plot_ly(
   test_line, 
   x = ~deadline, 
