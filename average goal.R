@@ -12,7 +12,7 @@ main_category_analysis <- function(data) {
     dplyr::summarize(main_mean_goal = round(mean(goal))) %>%
     arrange(-main_mean_goal) %>% 
     mutate(description = paste0("The main category ", main_category, 
-                                "'s mean goal is $", main_mean_goal))
+                                "'s mean goal is ", main_mean_goal))
   
   p <- plot_ly(main_category_df,
                x = ~main_category,

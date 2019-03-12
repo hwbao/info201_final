@@ -19,4 +19,12 @@ shinyServer(function(input, output) {
     find_rate(data, input$rate_main_category, as.numeric(input$year))
   }) 
   
+  output$mean_goal_main_category <- renderPlotly({ 
+    main_category_analysis(data)
+  }) 
+  
+  output$mean_goal_sub_category <- renderPlotly({ 
+    sub_category_analysis(data, input$main_category)
+  }) 
+  
 })
