@@ -23,7 +23,7 @@ shinyServer(function(input, output) {
   }) 
   
   output$rate <- renderPlotly({ 
-    find_rate(data, input$rate_main_category, as.numeric(input$year))
+    find_rate(data, "main_category", as.numeric(input$year))
   }) 
   
   output$mean_goal_main_category <- renderPlotly({ 

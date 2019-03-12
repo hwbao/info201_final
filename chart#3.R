@@ -13,7 +13,7 @@ cat_num <- ks_data %>%
   filter(state == "successful") %>%
   mutate(num_count = n())
 
-# rate for each main category
+# rate for all main category, create an interactive babble chart
 find_rate <- function(data, input_category, input_year) {
   modified_df <- data %>%
     select(input_category, state, deadline, backers) %>%
@@ -27,6 +27,54 @@ find_rate <- function(data, input_category, input_year) {
     select(input_category, success_rate, total_projects, total_backers) %>%
     unique(by = input_category) %>%
     arrange(success_rate)
+  
+  
+  babble_plot <- plot_ly(
+    modified_df,
+    x = ~success_rate,
+    y = ~total_projects,
+    name = ~main_category,
+    type = "scatter",
+    mode = "markers",
+    size = ~total_backers,
+    color = ~main_category,
+    colors = "Paired",
+    sizes = c(min(test_df$total_backers) / 300, max(test_df$total_backers) / 300),
+    marker = list(
+      symbol = "circle", opacity = 0.7, sizemode = "area",
+      line = list(width = 2, color = "#FFFFFF")
+    ),
+    hoverinfo = "text",
+    lengendgroup = ~main_category,
+    text = ~ paste(
+      "Category:", main_category,
+      "<br>Success Rate:", success_rate,
+      "<br>Amount Projects:", total_projects,
+      "<br>Amount Backers:", total_backers
+    )
+  ) %>%
+    layout(
+      title = "Success Rates vs. Amount Projects of Each Category",
+      font = list(color = "#C0C0C0"),
+      xaxis = list(
+        title = "Success Rates (%)",
+        color = "#C0C0C0", 
+        range = c(0, 110),
+        zerolinewidth = 1,
+        ticklen = 2,
+        gridwidth = 2
+      ),
+      yaxis = list(
+        title = "Amount Projects",
+        color = "#C0C0C0",
+        ticklen = 2,
+        gridwidth = 2
+      ),
+      legend = list(font = list(color = "#C0C0C0")),
+      paper_bgcolor = "#010402",
+      plot_bgcolor = "#010402"
+    )
+  babble_plot
 }
 
 test_df <- find_rate(ks_data, "main_category", 2016)
@@ -77,8 +125,10 @@ p1 <- plot_ly(
 ) %>%
   layout(
     title = "Success Rates vs. Amount Projects of Each Category",
+    font = list(color = "#C0C0C0"),
     xaxis = list(
       title = "Success Rates (%)",
+      color = "#C0C0C0", 
       range = c(0, 110),
       zerolinewidth = 1,
       ticklen = 2,
@@ -86,10 +136,11 @@ p1 <- plot_ly(
     ),
     yaxis = list(
       title = "Amount Projects",
+      color = "#C0C0C0",
       ticklen = 2,
       gridwidth = 2
     ),
-    legend = list(font = list(size = 12)),
+    legend = list(font = list(color = "#C0C0C0")),
     paper_bgcolor = "#010402",
     plot_bgcolor = "#010402"
   )
