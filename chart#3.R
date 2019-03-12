@@ -1,13 +1,7 @@
 library("shiny")
 library("plotly")
 library("dplyr")
-<<<<<<< HEAD
-library(collection)
-
-ks_data <- read.csv("./data/ks_projects_201801.csv", stringsAsFactors = F)
-=======
 library("lubridate")
->>>>>>> 33333a90e72f360abda8f5ec612dffcbdb65b724
 
 cat_num <- ks_data %>% 
   select(main_category, state, deadline, backers) %>% 
@@ -80,25 +74,20 @@ p2
 
 
 
-
-
-
-
-=======
   
-  modified_df$input_category <- factor(modified_df$input_category, 
-                          levels = c(as.character(modified_df$input_category)))
+  modified_df$"input_category" <- factor(modified_df$"input_category", 
+                          levels = c(as.character(modified_df$"input_category")))
   
   p <- plot_ly(
     modified_df,
-    x = ~input_category,
+    x = "input_category",
     y = ~success_rate,
     name = "Race chart",
     type = "bar"
     #marker = list(color = input$colors)
   ) %>%
     layout(
-      title = paste("Success Rate vs. Different Main Category"),
+      title = paste("Success Rate vs. Different Main Category in ", input_year),
       yaxis = list(title = "Success Rate (%)"),
       xaxis = list(title = "Category")
     )
@@ -106,4 +95,3 @@ p2
   return(p)
 }
 
->>>>>>> 33333a90e72f360abda8f5ec612dffcbdb65b724

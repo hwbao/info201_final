@@ -1,42 +1,39 @@
-# Load the libraries that needed
 library("shiny")
 library("plotly")
 
-source("backer.R")
-source("chart#3.R")
-source("average goal.R")
-
 shinyUI(
-  navbarPage(img(src='ar.png', width = "80px", height = "60px",align = "top"),
-             #includeCSS("style.css"),
-             tags$head(tags$link(href = "style.css", rel = "stylesheet")),
+  navbarPage(img(id = "kickstart_logo" , src='kickstarter.png', width = "250px",
+                 height = "50px", align = "top"),
+             theme = "style.css",
              
-             tabPanel("Home", 
-                      titlePanel("Home"),
+  
+            tabPanel("Home",
+                    titlePanel("Home"),
+                    img(id = "logo" , src='ar.png', width = "80px",
+                          height = "60px", align = "top"),
+                    
                      
-                      sidebarLayout(
-                        # Set all the choices that user can make, and how
-                        # each button work, and their names
-                        sidebarPanel(
-                          # The user input of different type of project
-                          selectInput("type_project",
-                                      label = "Choose the Type of project",
-                                      choices = list(
-                                        
-                                      )
-                          )
-                        ),
-                        
-                        mainPanel(
-                          tags$p("test"),
-                          tags$div(class="header", checked=NA,
-                                   tags$p("Ready to take the Shiny tutorial? If so"),
-                                   tags$a(href="shiny.rstudio.com/tutorial", "Click Here!")
-                          )
-                          
-                        )
-                      )
-             ),
+            tags$body(
+              tags$a(href = "https://www.kickstarter.com", "Kickstarter"),
+              "is a global crowdfunding platform that focuses on 
+              creativity and merchandising. Kickstarter has reportedly received 
+              more than $4 billion in pledges from 15.5 million backers to fund 
+              257,000 creative projects, such as films, music, video games, etc. 
+              We have found our dataset about Kickstarter from the",
+              tags$a(href = "https://www.kaggle.com/kemical/kickstarter-projects", "Kaggle Platform"),
+              
+              "This data includes total of 378661 observations from 2009 to 2018 including 
+              different features such as name of the kickstarter project, category of the 
+              project, goals for fundraising, duration of the fundraising process, amount of 
+              money raised, and the status of the project(successful, fail, cancel, etc.)
+              Through our team’s analysis, we have analyzed this data in terms of the 
+              relationship and the trend of the successful rate with different category over 
+              years, the average fundraising goal of a project, and the average amount of 
+              money a backer would be willing to give. 
+              We have created this website to proudly present our finding about the 
+              kickstarter dataset."
+            )            
+            ),
              
              #--------------------------Success Rate----------------#
              tabPanel("Success Rate", 
@@ -63,14 +60,29 @@ shinyUI(
              ),
              #-------------------------------------------------------------#
              tabPanel("Goals", 
-                      # Give the page a title
                       titlePanel("Average Goals"),
-                      # Create The side bar layout
                       sidebarLayout(
-                        # Set all the choices that user can make, and how
-                        # each button work, and their names
                         sidebarPanel(
-                          # The user input of different type of project
+                          selectInput("main_category",
+                          label = "Please Choose the Category You are interested in",
+                          choices = list(
+                            "All Category" = "main_category"
+                                      )
+                          )
+                        ),
+                        
+                        mainPanel(
+                          plotlyOutput("mean_goal_main_category"),
+                          plotlyOutput("mean_goal_sub_category")
+                        )
+                      )
+             ),
+             
+             #----------------------------------------Celia----------------#
+             tabPanel("Backer's Investment", 
+                      titlePanel("Backer's Investment Information"),
+                      sidebarLayout(
+                        sidebarPanel(
                           selectInput("type_project",
                                       label = "Choose the Type of project",
                                       choices = list(
@@ -81,30 +93,6 @@ shinyUI(
                         
                         mainPanel(
                           p("test")
-                        )
-                      )
-             ),
-             
-             #----------------------------------------Celia----------------#
-             tabPanel("Backer's Investment", 
-                      # Give the page a title
-                      titlePanel("Backer's Investment Information"),
-                      # Create The side bar layout
-                      sidebarLayout(
-                        # Set all the choices that user can make, and how
-                        # each button work, and their names
-                        sidebarPanel(
-                          # The user input of different type of project
-                          selectInput("type_project",
-                                      label = "Choose the Type of project",
-                                      choices = list(
-                                        
-                                      )
-                          )
-                        ),
-                        
-                        mainPanel(
-                          p("test")  #plotly_graph
                         )
                       )
              )

@@ -1,6 +1,9 @@
 library(dplyr)
 library(plotly)
 
+source("backer.R")
+source("chart#3.R")
+source("average goal.R")
 source("scripts/initial_info.R")
 data <- read.csv("data/ks_projects_201801.csv", stringsAsFactors = F)
 
@@ -15,8 +18,20 @@ shinyServer(function(input, output) {
     )
   })
   
+  output$num_rows <- renderText({ 
+    num_rows(data)
+  }) 
+  
   output$rate <- renderPlotly({ 
     find_rate(data, input$rate_main_category, as.numeric(input$year))
+  }) 
+  
+  output$mean_goal_main_category <- renderPlotly({ 
+    main_category_analysis(data)
+  }) 
+  
+  output$mean_goal_sub_category <- renderPlotly({ 
+    sub_category_analysis(data, input$main_category)
   }) 
   
 })
