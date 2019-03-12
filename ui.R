@@ -85,7 +85,8 @@ shinyUI(
                                         "Art" = "Art",
                                         "Food" = "Food"
                                       )
-                          )
+                          
+                                      )
                         ),
                         
                         mainPanel(
