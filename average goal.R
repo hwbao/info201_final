@@ -10,7 +10,7 @@ main_category_analysis <- function(data) {
     select(main_category, goal) %>%
     group_by(main_category) %>%
     dplyr::summarize(main_mean_goal = round(mean(goal))) %>%
-    arrange(desc(main_mean_goal)) %>% 
+    arrange(-main_mean_goal) %>% 
     mutate(description = paste0("The main category ", main_category, 
                                 "'s mean goal is $", main_mean_goal))
   
@@ -36,7 +36,7 @@ sub_category_analysis <- function(data, chosen_main_category){
     filter(main_category == chosen_main_category) %>% 
     group_by(category) %>%
     dplyr::summarize(sub_mean_goal = round(mean(goal))) %>% 
-    arrange(desc(sub_mean_goal)) %>% 
+    arrange(-sub_mean_goal) %>% 
     mutate(description = paste0("The sub category ", category, "'s mean goal is ", sub_mean_goal))
   
   pp <- plot_ly(sub_category_df, x = ~category, y = ~sub_mean_goal, 
