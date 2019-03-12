@@ -68,16 +68,17 @@ shinyUI(
                         # each button work, and their names
                         sidebarPanel(
                           # The user input of different type of project
-                          selectInput("type_project",
-                                      label = "Choose the Type of project",
+                          selectInput("main_category",
+                                      label = "Please Choose the Category You are interested in",
                                       choices = list(
-                                        
+                                        "All Category" = "main_category"
                                       )
                           )
                         ),
                         
                         mainPanel(
-                          p("test")
+                          plotlyOutput("mean_goal_main_category"),
+                          plotlyOutput("mean_goal_sub_category")
                         )
                       )
              ),
