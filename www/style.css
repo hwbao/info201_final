@@ -1,0 +1,26 @@
+
+@import url( "https://fonts.googleapis.com/css?family=Roboto:300")
+
+
+body{
+    font-family: 'Roboto', sans-serif;
+    width: 80%;
+}
+
+p{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
+.navbar { background-color: whitesmoke;
+    height: 100px;
+    font-family: Arial;
+    font-size: 13px;
+    color: black ;
+}
+
+.img {
+    width : "200px";
+    height : "60px";
+    box-align : "top";
+}
