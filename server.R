@@ -34,7 +34,7 @@ shinyServer(function(input, output) {
     sub_category_analysis(data, input$selected_main_category)
   }) 
   
-  output$test <- renderPlotly({
-    draw_backer_project_relationship(type_project)
+  output$backers <- renderPlotly({
+    draw_backer_project_relationship(data, input$type_project)
   })
 })

@@ -88,7 +88,7 @@ shinyUI(
                         ),
                         
                         mainPanel(
-                          plotlyOutput("test")
+                          plotlyOutput("backers")
                         )
                       )
              )
