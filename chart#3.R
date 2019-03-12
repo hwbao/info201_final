@@ -1,9 +1,13 @@
 library("shiny")
 library("plotly")
 library("dplyr")
+<<<<<<< HEAD
 library(collection)
 
 ks_data <- read.csv("./data/ks_projects_201801.csv", stringsAsFactors = F)
+=======
+library("lubridate")
+>>>>>>> 33333a90e72f360abda8f5ec612dffcbdb65b724
 
 find_rate <- function(data, input_category, input_year){
   modified_df <- data %>% 
@@ -18,6 +22,7 @@ find_rate <- function(data, input_category, input_year){
     select(input_category, success_rate) %>% 
     unique(by = input_category) %>% 
     arrange(success_rate)
+<<<<<<< HEAD
 }
 
 test_df <- find_rate(ks_data, "main_category", 2016)
@@ -69,3 +74,26 @@ p2
 
 
 
+=======
+  
+  modified_df$input_category <- factor(modified_df$input_category, 
+                          levels = c(as.character(modified_df$input_category)))
+  
+  p <- plot_ly(
+    modified_df,
+    x = ~input_category,
+    y = ~success_rate,
+    name = "Race chart",
+    type = "bar"
+    #marker = list(color = input$colors)
+  ) %>%
+    layout(
+      title = paste("Success Rate vs. Different Main Category"),
+      yaxis = list(title = "Success Rate (%)"),
+      xaxis = list(title = "Category")
+    )
+  
+  return(p)
+}
+
+>>>>>>> 33333a90e72f360abda8f5ec612dffcbdb65b724
