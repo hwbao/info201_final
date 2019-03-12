@@ -2,7 +2,7 @@ library("shiny")
 library("plotly")
 library("dplyr")
 library("lubridate")
-
+ks_data <- read.csv("data/ks_projects_201801.csv", stringsAsFactors = F)
 # use for test
 cat_num <- ks_data %>%
   select(main_category, state, deadline, backers) %>%

@@ -7,13 +7,13 @@ shinyUI(
              theme = "style.css",
              
   
-            tabPanel("Home",
+            tabPanel(tags$div(id = "tab", icon = icon("home"), tags$p(id = "test",  "Home")), 
                     titlePanel("Home"),
                     img(id = "logo" , src='ar.png', width = "80px",
                           height = "60px", align = "top"),
                     
                      
-            tags$body(
+            tags$div( id = "intro",
               tags$a(href = "https://www.kickstarter.com", "Kickstarter"),
               "is a global crowdfunding platform that focuses on 
               creativity and merchandising. Kickstarter has reportedly received 
@@ -36,7 +36,7 @@ shinyUI(
             ),
              
              #--------------------------Success Rate----------------#
-             tabPanel("Success Rate", 
+             tabPanel("Success Rate", icon = icon("star-half-alt"),
                       titlePanel("Success Rate"),
                       sidebarLayout(
                         sidebarPanel(
@@ -54,12 +54,13 @@ shinyUI(
                         ),
                         
                         mainPanel(
-                          plotlyOutput("rate")
+                          #plotlyOutput("rate")
+                          p("testing")
                         )
                       )
              ),
              #-------------------------------------------------------------#
-             tabPanel("Goals", 
+             tabPanel("Goals", icon = icon("dollar-sign"),
                       titlePanel("Average Goals"),
                       sidebarLayout(
                         sidebarPanel(
@@ -74,7 +75,7 @@ shinyUI(
              ),
              
              #----------------------------------------Celia----------------#
-             tabPanel("Backer's Investment", 
+             tabPanel("Backer's Investment", icon = icon("hand-holding-usd"),
                       titlePanel("Backer's Investment Information"),
                       sidebarLayout(
                         sidebarPanel(
