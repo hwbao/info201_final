@@ -5,8 +5,6 @@ library(plotly)
 # Read the data about kickstarter and convert it into a dataframe
 kickstarter <- read.csv("data/ks_projects_201801.csv", stringsAsFactors = F)
 
-top <- "20"
-
 draw_sankey_graph <- function(kickstarter, top) {
 new_data <- kickstarter %>%
   dplyr::filter(main_category != category) %>%
@@ -20,7 +18,8 @@ new_data$fac_main_cate <- as.numeric(factor(new_data$main_category)) - 1
 arrange_data <- new_data %>%
   arrange(fac_main_cate)
 
-arrange_data$fac_cate <- as.numeric(factor(arrange_data$category)) + 6
+arrange_data$fac_cate <- as.numeric(factor(arrange_data$category)) +
+                                    length(unique(arrange_data$main_category))
 
   
   draw_graph <- plot_ly(type = "sankey", 
