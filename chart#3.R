@@ -6,8 +6,8 @@ library("lubridate")
 find_rate <- function(data, input_category, input_year){
   modified_df <- data %>% 
     select(input_category, state, deadline) %>% 
-    mutate(deadline = substring(deadline, 1, 4)) %>% 
-    group_by_("input_category") %>% 
+    mutate(deadline = as.numeric(substring(deadline, 1, 4))) %>% 
+    group_by_(input_category) %>% 
     filter(deadline == input_year) %>% 
     mutate(total_count = n()) %>% 
     filter(state == "successful") %>%
