@@ -81,13 +81,14 @@ shinyUI(
                           selectInput("type_project",
                                       label = "Choose the Type of project",
                                       choices = list(
-                                        
+                                        "Art" = "Art",
+                                        "Food" = "Food"
                                       )
                           )
                         ),
                         
                         mainPanel(
-                          p("test")
+                          plotlyOutput("test")
                         )
                       )
              )
