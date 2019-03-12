@@ -14,13 +14,16 @@ main_category_analysis <- function(data) {
     mutate(description = paste0("The main category ", main_category, 
                                 "'s mean goal is ", main_mean_goal))
   
+  main_category_df$main_category <- factor(main_category_df$main_category, 
+                  levels = c(as.character(main_category_df$main_category)))
+  
   p <- plot_ly(main_category_df,
                x = ~main_category,
                y = ~main_mean_goal,
                text = ~description,
                type = "bar"
   ) %>%
-    layout(title = "Average goal for specific category",
+    layout(title = "Average Goal for All Category",
            xaxis = list(title = "Main category"),
            yaxis = list(title = "Goal")
     )  
@@ -39,9 +42,15 @@ sub_category_analysis <- function(data, chosen_main_category){
     arrange(-sub_mean_goal) %>% 
     mutate(description = paste0("The sub category ", category, "'s mean goal is ", sub_mean_goal))
   
+  sub_category_df$category <- factor(sub_category_df$category, 
+               levels = c(as.character(sub_category_df$category)))
+  
+  sizeref <- 2.0 * max(sub_category_df$sub_mean_goal) / (10**2)
+  
   pp <- plot_ly(sub_category_df, x = ~category, y = ~sub_mean_goal, 
                 text = ~description, type = 'scatter', mode = 'markers',
-                marker = list(size = ~sub_mean_goal*0.001, opacity = 0.5)) %>%
+                marker = list(size = ~sub_mean_goal, opacity = 0.5,
+                              sizeref = sizeref)) %>%
     layout(title = 'Mean goal for sub_category in each main category',
            xaxis = list(showgrid = FALSE),
            yaxis = list(showgrid = FALSE))

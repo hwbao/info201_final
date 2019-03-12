@@ -10,11 +10,11 @@ data <- read.csv("data/ks_projects_201801.csv", stringsAsFactors = F)
 # Start shinyServer
 shinyServer(function(input, output) { 
   
-  output$county_selction <- renderUI({
+  output$categories <- renderUI({
     selectInput(
-      "county",
-      label = "County Name",
-      choices = as.list(county_name(input$state))
+      "selected_main_category",
+      label = "Please choose the category you are interested in",
+      choices = as.list((main_cat_list(data)))
     )
   })
   
@@ -31,7 +31,7 @@ shinyServer(function(input, output) {
   }) 
   
   output$mean_goal_sub_category <- renderPlotly({ 
-    sub_category_analysis(data, input$main_category)
+    sub_category_analysis(data, input$selected_main_category)
   }) 
   
 })

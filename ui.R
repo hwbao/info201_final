@@ -63,12 +63,7 @@ shinyUI(
                       titlePanel("Average Goals"),
                       sidebarLayout(
                         sidebarPanel(
-                          selectInput("main_category",
-                          label = "Please Choose the Category You are interested in",
-                          choices = list(
-                            "All Category" = "main_category"
-                                      )
-                          )
+                          uiOutput("categories")
                         ),
                         
                         mainPanel(
