@@ -74,8 +74,24 @@ shinyUI(
                         )
                       )
              ),
+            
+            #-------------------------------------------------------------#
+            tabPanel("Snakey", icon = icon("dollar-sign"),
+                     titlePanel("Where"),
+                     sidebarLayout(
+                       sliderInput("top_snakey", 
+                                   label = "Please Choose the top amount of data you want to see",
+                                   min = 0, max = 50,
+                                   value = 20
+                       ),
+                       
+                       mainPanel(
+                         plotlyOutput("snakey")
+                       )
+                     )
+            ),
              
-             #----------------------------------------Celia----------------#
+             #-------------------------------------------------------------#
              tabPanel("Backer's Investment", icon = icon("hand-holding-usd"),
                       titlePanel("Backer's Investment Information"),
                       sidebarLayout(

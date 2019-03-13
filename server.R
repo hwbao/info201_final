@@ -5,6 +5,7 @@ source("backer.R")
 #source("chart#3.R")
 source("average goal.R")
 source("scripts/initial_info.R")
+source("total_backer.R")
 data <- read.csv("data/ks_projects_201801.csv", stringsAsFactors = F)
 
 # Start shinyServer
@@ -36,5 +37,9 @@ shinyServer(function(input, output) {
   
   output$backers <- renderPlotly({
     draw_backer_project_relationship(data, input$type_project)
+  })
+  
+  output$snakey <- renderPlotly({
+    draw_sankey_graph(kickstarter, input$top_snakey)
   })
 })
