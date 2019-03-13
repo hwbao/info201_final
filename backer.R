@@ -18,14 +18,17 @@ draw_backer_project_relationship <- function(data, project_name) {
                                 avg)
            )
   
-  
   draw_each_sub <- plot_ly(select_project,
                           x = select_project$category,
                           y = select_project$avg,
                           text = ~description,
                           type = "bar",
                           name = select_project$category) %>%
-                   layout(yaxis = list(title = "average pledged"))
-  return(draw_each_sub)
-}  
+                   layout(title = "Backer's average investment",
+                          font = list(color = "#C0C0C0"),
+                          yaxis = list(title = "average pledged"),
+                          paper_bgcolor = "black",
+                          plot_bgcolor = "black",
+                          showlegend = TRUE)
+} 
 
