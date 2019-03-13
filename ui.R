@@ -2,7 +2,7 @@ library("shiny")
 library("plotly")
 
 shinyUI(
-  navbarPage(img(id = "kickstart_logo" , src='kickstarter.png', width = "250px",
+  navbarPage(img(id = "kickstart_logo" , src='kickstarter_white.png', width = "250px",
                  height = "50px", align = "top"),
              theme = "style.css",
              
@@ -26,7 +26,7 @@ shinyUI(
               different features such as name of the kickstarter project, category of the 
               project, goals for fundraising, duration of the fundraising process, amount of 
               money raised, and the status of the project(successful, fail, cancel, etc.)
-              Through our team’s analysis, we have analyzed this data in terms of the 
+              Through our team's analysis, we have analyzed this data in terms of the 
               relationship and the trend of the successful rate with different category over 
               years, the average fundraising goal of a project, and the average amount of 
               money a backer would be willing to give. 
@@ -44,13 +44,13 @@ shinyUI(
                                       label = "Please Choose the <em>Year</em> You are interested in",
                                       min = 2009, max = 2017,
                                       value = 2009
-                          )，
+                          ),
                           selectInput("rate_sub_category",
                                       label = "Please Choose the Sub Category You are interested in",
                                       choices = list(
                                         "All Category" = "category"
                                       )
-                          ),
+                          )
                           
                         ),
                         
