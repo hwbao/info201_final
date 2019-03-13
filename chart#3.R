@@ -48,10 +48,7 @@ find_rate <- function(data, input_year) {
     colors = "Paired",
     sizes = c(min(modified_df$total_backers) / 200,
               max(modified_df$total_backers) / 200),
-    marker = list(
-      symbol = "circle", opacity = 0.7, sizemode = "area",
-      line = list(width = 0)
-    ),
+    marker = list(symbol = "circle", opacity = 0.7, sizemode = "area"),
     hoverinfo = "text",
     legendgroup = ~main_category,
     text = ~paste(
@@ -62,12 +59,8 @@ find_rate <- function(data, input_year) {
     )
   ) %>%
     layout(
-<<<<<<< HEAD
-      title = "Amount Projects vs. Success Rates of Each Category",
-=======
       autosize = T, margin = m,
       title = "Success Rates vs. Amount Projects of Each Category",
->>>>>>> 7a8ea7e497a0c2cf13c0010b6b9222ed37c75cea
       font = list(color = "#C0C0C0"),
       xaxis = list(
         title = "Amount Projects",

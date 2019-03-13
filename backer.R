@@ -14,7 +14,7 @@ draw_backer_project_relationship <- function(data, project_name) {
               total_backers = sum(backers)) %>% 
     mutate(avg = round(total_pledged / total_backers), 
            description = paste0(category,
-                                "'s average pledge from each backer is $",
+                                "'s Average Pledge from Each Backer is $",
                                 avg)
            ) %>% 
     arrange(-avg)
@@ -27,12 +27,14 @@ draw_backer_project_relationship <- function(data, project_name) {
                           y = ~avg,
                           text = ~description,
                           type = "bar",
+                          opacity = 0.85,
                           name = ~category) %>%
-                   layout(title = "Backer's average investment",
+                   layout(title = "Backer's Average Investment",
                           font = list(color = "#C0C0C0"),
-                          yaxis = list(title = "average pledged"),
-                          paper_bgcolor = "black",
-                          plot_bgcolor = "black",
+                          xaxis = list(title = "Category"),
+                          yaxis = list(title = "Average Pledged"),
+                          paper_bgcolor = "#010402",
+                          plot_bgcolor = "#010402",
                           showlegend = TRUE)
 } 
 

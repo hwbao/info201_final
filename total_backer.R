@@ -54,15 +54,15 @@ draw_sankey_graph <- function(kickstarter, top) {
                                       color = "#4BC3B5")
                         ) %>%
       layout(
-        title = "Total pledged from main category to sub category",
+        title = "Total Pledged from Main Category to Sub Category",
         font = list(
           size = 11,
           color = "#C0C0C0"
         ),
         xaxis = list(showgrid = T, zeroline = T),
         yaxis = list(showgrid = F, zeroline = F),
-        plot_bgcolor = "#1C2C54",
-        paper_bgcolor = "#1C2C54"
+        plot_bgcolor = "#010402",
+        paper_bgcolor = "#010402"
       )
 
   return(draw_graph)

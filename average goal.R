@@ -18,8 +18,8 @@ main_category_analysis <- function(data) {
     group_by(main_category) %>%
     dplyr::summarize(main_mean_goal = round(mean(goal))) %>%
     arrange(-main_mean_goal) %>% 
-    mutate(description = paste0("The main category ", main_category, 
-                                "'s mean goal is $", main_mean_goal))
+    mutate(description = paste0("The Main Category ", main_category, 
+                                "'s Mean Goal is $", main_mean_goal))
   
   main_category_df$main_category <- factor(main_category_df$main_category, 
                                            levels = c(as.character(main_category_df$main_category)))
@@ -29,13 +29,15 @@ main_category_analysis <- function(data) {
                y = ~main_mean_goal,
                text = ~description,  
                type = "bar",
-               marker = list(color = "#4BC3B5"),
-               opacity = 1.2) %>%
+               color = ~main_category,
+               colors = "Paired",
+               opacity = 0.9
+               ) %>%
     layout(autosize = T, margin = m,
            title = "Average Goal for All Main Category",
            font = list(color = "#C0C0C0"),
-           xaxis = list(title = "Main category"),
-           yaxis = list(title = "Goal"),
+           xaxis = list(title = "Main Category"),
+           yaxis = list(title = "Goal (USD)"),
            paper_bgcolor = "#010402",
            plot_bgcolor = "#010402"
     )  
@@ -52,7 +54,7 @@ sub_category_analysis <- function(data, chosen_main_category){
     group_by(category) %>%
     dplyr::summarize(sub_mean_goal = round(mean(goal))) %>% 
     arrange(-sub_mean_goal) %>% 
-    mutate(description = paste0("The sub category ", category, "'s mean goal is $", sub_mean_goal))
+    mutate(description = paste0("The Sub Category ", category, "'s Mean Goal is $", sub_mean_goal))
   
   sub_category_df$category <- factor(sub_category_df$category, 
                levels = c(as.character(sub_category_df$category)))
@@ -68,9 +70,9 @@ sub_category_analysis <- function(data, chosen_main_category){
                 marker = list(size = ~sub_mean_goal, 
                               sizeref = sizeref, color = "D175B7", line = list(width = 0) )) %>%
     layout(autosize = T, margin = m,
-           title = 'Mean goal for sub category in each main category',
-           xaxis = list(showgrid = FALSE),
-           yaxis = list(showgrid = FALSE, title = "sub category goal"),
+           title = 'Mean Goal for Sub Categories In Each Main Category',
+           xaxis = list(title = "Sub Category"),
+           yaxis = list(showgrid = FALSE, title = "Sub Category Goal (USD)"),
            font = list(color = "#C0C0C0"),
            paper_bgcolor = "#010402",
            plot_bgcolor = "#010402")
