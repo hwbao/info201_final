@@ -39,7 +39,7 @@ shinyServer(function(input, output) {
     draw_backer_project_relationship(data, input$type_project)
   })
   
-  output$snakey <- renderPlotly({
-    draw_sankey_graph(kickstarter, input$top_snakey)
+  output$sankey <- renderPlotly({
+    draw_sankey_graph(data, input$top_project)
   })
 })

@@ -76,17 +76,17 @@ shinyUI(
              ),
             
             #-------------------------------------------------------------#
-            tabPanel("Snakey", icon = icon("dollar-sign"),
+            tabPanel("Pledged Money", icon = icon("dollar-sign"),
                      titlePanel("Where"),
                      sidebarLayout(
-                       sliderInput("top_snakey", 
+                       sliderInput("top_project", 
                                    label = "Please Choose the top amount of data you want to see",
                                    min = 0, max = 50,
                                    value = 20
                        ),
                        
                        mainPanel(
-                         plotlyOutput("snakey")
+                         plotlyOutput("sankey")
                        )
                      )
             ),
