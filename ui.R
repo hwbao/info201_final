@@ -26,9 +26,6 @@ shinyUI(
   
             tabPanel( "Home", icon = icon("home"), 
                     titlePanel("Home"),
-                    img(id = "logo" , src='ar.png', width = "80px",
-                          height = "60px", align = "top"),
-                    
                      
             tags$div( id = "intro",
               tags$a(href = "https://www.kickstarter.com", "Kickstarter"),
