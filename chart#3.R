@@ -31,15 +31,16 @@ find_rate <- function(data, input_year) {
   
   babble_plot <- plot_ly(
     modified_df,
-    x = ~success_rate,
-    y = ~total_projects,
+    x = ~total_projects,
+    y = ~success_rate,
     name = ~main_category,
     type = "scatter",
     mode = "markers",
     size = ~total_backers,
     color = ~main_category,
     colors = "Paired",
-    sizes = c(min(modified_df$total_backers) / 300, max(modified_df$total_backers) / 300),
+    sizes = c(min(modified_df$total_backers) / 200,
+              max(modified_df$total_backers) / 200),
     marker = list(
       symbol = "circle", opacity = 0.7, sizemode = "area",
       line = list(width = 2, color = "#FFFFFF")
@@ -54,19 +55,19 @@ find_rate <- function(data, input_year) {
     )
   ) %>%
     layout(
-      title = "Success Rates vs. Amount Projects of Each Category",
+      title = "Amount Projects vs. Success Rates of Each Category",
       font = list(color = "#C0C0C0"),
       xaxis = list(
-        title = "Success Rates (%)",
+        title = "Amount Projects",
         color = "#C0C0C0", 
-        range = c(0, 110),
         zerolinewidth = 1,
         ticklen = 2,
         gridwidth = 2
       ),
       yaxis = list(
-        title = "Amount Projects",
+        title = "Success Rates (%)",
         color = "#C0C0C0",
+        range = c(0, 110),
         ticklen = 2,
         gridwidth = 2
       ),
@@ -79,3 +80,27 @@ find_rate <- function(data, input_year) {
 
 test_df <- find_rate(ks_data, 2016)
 
+find_line <- function(data, sub_category) {
+  modified_df <- data %>%
+    select(category, state, deadline) %>%
+    mutate(deadline = as.numeric(substring(deadline, 1, 4))) %>%
+    group_by(deadline) %>%
+    filter(category == sub_category) %>%
+    mutate(total_count = n()) %>%
+    filter(state == "successful") %>%
+    mutate(success = n()) %>%
+    mutate(success_rate = round(success / total_count * 100, 1)) %>%
+    select(category, success_rate, deadline) %>%
+    unique(by = deadline) %>%
+    ungroup(deadline) %>%
+    arrange(deadline)
+}
+
+p2 <- plot_ly(
+  test_line,
+  x = ~deadline,
+  y = ~success_rate,
+  type = "scatter",
+  mode = "lines+markers"
+)
+p2
