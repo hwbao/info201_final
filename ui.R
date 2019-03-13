@@ -44,13 +44,13 @@ shinyUI(
                                       label = "Please Choose the <em>Year</em> You are interested in",
                                       min = 2009, max = 2017,
                                       value = 2009
-                          )，
+                          ),
                           selectInput("rate_sub_category",
                                       label = "Please Choose the Sub Category You are interested in",
                                       choices = list(
                                         "All Category" = "category"
                                       )
-                          ),
+                          )
                           
                         ),
                         
