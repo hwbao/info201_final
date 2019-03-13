@@ -48,6 +48,6 @@ shinyServer(function(input, output) {
   })
   
   output$sankey <- renderPlotly({
-    draw_sankey_graph(data, input$top_project)
+    draw_sankey_graph(data)
   })
 })
