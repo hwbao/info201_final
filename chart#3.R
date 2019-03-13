@@ -28,6 +28,13 @@ find_rate <- function(data, input_year) {
     unique(by = main_category) %>%
     arrange(success_rate)
   
+  m <- list(
+    l = 50,
+    r = 50,
+    b = 100,
+    t = 100,
+    pad = 4
+  )
   
   babble_plot <- plot_ly(
     modified_df,
@@ -42,7 +49,7 @@ find_rate <- function(data, input_year) {
     sizes = c(min(modified_df$total_backers) / 300, max(modified_df$total_backers) / 300),
     marker = list(
       symbol = "circle", opacity = 0.7, sizemode = "area",
-      line = list(width = 2, color = "#FFFFFF")
+      line = list(width = 0)
     ),
     hoverinfo = "text",
     legendgroup = ~main_category,
@@ -54,6 +61,7 @@ find_rate <- function(data, input_year) {
     )
   ) %>%
     layout(
+      autosize = T, margin = m,
       title = "Success Rates vs. Amount Projects of Each Category",
       font = list(color = "#C0C0C0"),
       xaxis = list(

@@ -7,17 +7,28 @@ shinyUI(
   navbarPage(
     
     
-    img(id = "kickstart_logo" , src='kickstarter_white.png', width = "250px",
+    img(id = "kickstart_logo" , src='kickstarter_white.png', width = "333px",
                  height = "50px", align = "top"),
                  theme = shinytheme("cyborg"),
     
     tags$head(
       tags$style(HTML("
       
-      
+      .navbar { 
+            font-family: 'Roboto';
+            color: rgb(221, 221, 221) ;
+                      }
       body {
             max-width: 1500px;
             margin: 0 auto;
+            letter-spacing: 3px;
+            color:rgb(221, 221, 221);
+      }
+      footer {
+            margin-top: 100px;
+      }
+      #intro {
+            max-width: 624px;
       }
 
     "))
@@ -25,7 +36,7 @@ shinyUI(
              
   
             tabPanel( "Home", icon = icon("home"), 
-                    titlePanel("Home"),
+                    titlePanel(tags$h5("Home")),
                      
             tags$div( id = "intro",
               tags$a(href = "https://www.kickstarter.com", "Kickstarter"),
@@ -51,16 +62,16 @@ shinyUI(
              
              #--------------------------Success Rate----------------#
              tabPanel("Success Rate", icon = icon("star-half-alt"),
-                      titlePanel("Success Rate"),
+                      titlePanel(tags$h5("Success Rate")),
                       sidebarLayout(
                         sidebarPanel(
                           sliderInput("year", 
-                                      label = "Please Choose the <em>Year</em> You are interested in",
+                                      label = "Please choose the year you are interested in",
                                       min = 2009, max = 2017,
                                       value = 2009
                           ),
                           selectInput("rate_sub_category",
-                                      label = "Please Choose the Sub Category You are interested in",
+                                      label = "Please choose the sub category you are interested in",
                                       choices = list(
                                         "All Category" = "category"
                                       )
@@ -75,7 +86,7 @@ shinyUI(
              ),
              #-------------------------------------------------------------#
              tabPanel("Goals", icon = icon("dollar-sign"),
-                      titlePanel("Average Goals"),
+                      titlePanel(tags$h5("Average Goals")),
                       sidebarLayout(
                         sidebarPanel(
                           uiOutput("categories")
@@ -90,10 +101,10 @@ shinyUI(
             
             #-------------------------------------------------------------#
             tabPanel("Pledged Money", icon = icon("dollar-sign"),
-                     titlePanel("Where"),
+                     titlePanel(tags$h5("Where")),
                      sidebarLayout(
                        sliderInput("top_project", 
-                                   label = "Please Choose the top amount of data you want to see",
+                                   label = "Please choose the top amount of data you want to see",
                                    min = 0, max = 50,
                                    value = 20
                        ),
@@ -106,7 +117,7 @@ shinyUI(
              
              #-------------------------------------------------------------#
              tabPanel("Backer's Investment", icon = icon("hand-holding-usd"),
-                      titlePanel("Backer's Investment Information"),
+                      titlePanel(tags$h5("Backer's Investment Information")),
                       sidebarLayout(
                         sidebarPanel(
                           uiOutput("backer_ui")
@@ -119,8 +130,8 @@ shinyUI(
              ),
              #-------------------------------------------------------------#
             tags$footer(
-              img(id = "ar_logo" , src='footer.png', width = "350px",
-                  height = "80px", align = "right")
+              img(id = "ar_logo" , src='footer.png', width = "414px",
+                  height = "45px", align = "right" )
             )
   )
   

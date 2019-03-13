@@ -65,8 +65,8 @@ sub_category_analysis <- function(data, chosen_main_category){
                 text = ~description,
                 type = 'scatter',
                 mode = 'markers',
-                marker = list(size = ~sub_mean_goal, opacity = 1.2,
-                              sizeref = sizeref, color = "D175B7")) %>%
+                marker = list(size = ~sub_mean_goal, 
+                              sizeref = sizeref, color = "D175B7", line = list(width = 0) )) %>%
     layout(autosize = T, margin = m,
            title = 'Mean goal for sub category in each main category',
            xaxis = list(showgrid = FALSE),
