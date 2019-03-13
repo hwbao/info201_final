@@ -22,18 +22,22 @@ main_category_analysis <- function(data) {
                                 "'s mean goal is $", main_mean_goal))
   
   main_category_df$main_category <- factor(main_category_df$main_category, 
-                  levels = c(as.character(main_category_df$main_category)))
+                                           levels = c(as.character(main_category_df$main_category)))
   
   p <- plot_ly(main_category_df,
                x = ~main_category,
                y = ~main_mean_goal,
                text = ~description,  
-               type = "bar"
-  ) %>%
+               type = "bar",
+               marker = list(color = "#4BC3B5"),
+               opacity = 1.2) %>%
     layout(autosize = T, margin = m,
-           title = "Average Goal for All Category",
+           title = "Average Goal for All Main Category",
+           font = list(color = "#C0C0C0"),
            xaxis = list(title = "Main category"),
-           yaxis = list(title = "Goal")
+           yaxis = list(title = "Goal"),
+           paper_bgcolor = "#010402",
+           plot_bgcolor = "#010402"
     )  
   
   return(p)
@@ -55,14 +59,22 @@ sub_category_analysis <- function(data, chosen_main_category){
   
   sizeref <- 2.0 * max(sub_category_df$sub_mean_goal) / (10**2)
   
-  pp <- plot_ly(sub_category_df, x = ~category, y = ~sub_mean_goal, 
-                text = ~description, type = 'scatter', mode = 'markers',
-                marker = list(size = ~sub_mean_goal, opacity = 0.5,
-                              sizeref = sizeref)) %>%
+  pp <- plot_ly(sub_category_df,
+                x = ~category,
+                y = ~sub_mean_goal, 
+                text = ~description,
+                type = 'scatter',
+                mode = 'markers',
+                marker = list(size = ~sub_mean_goal, 
+                              sizeref = sizeref, color = "D175B7", line = list(width = 0) )) %>%
     layout(autosize = T, margin = m,
-           title = 'Mean goal for sub_category in each main category',
+           title = 'Mean goal for sub category in each main category',
            xaxis = list(showgrid = FALSE),
-           yaxis = list(showgrid = FALSE))
+           yaxis = list(showgrid = FALSE, title = "sub category goal"),
+           font = list(color = "#C0C0C0"),
+           paper_bgcolor = "#010402",
+           plot_bgcolor = "#010402")
   
   return(pp)
 }
+
