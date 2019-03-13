@@ -19,7 +19,7 @@ arrange_data <- new_data %>%
   arrange(fac_main_cate)
 
 arrange_data$fac_cate <- as.numeric(factor(arrange_data$category)) +
-                                    length(unique(arrange_data$main_category))
+                                    length(unique(arrange_data$main_category)) - 1
 
 
 m <- list(
@@ -43,7 +43,8 @@ m <- list(
                           color = "#D175B7",
                           pad = 15,
                           thickness = 20,
-                          line = list(color = "black", width = 0.5)
+                          line = list(color = "black", width = 0.5),
+                          textfont = list(color = "white")
                         ),
                         
                         link = list(source = arrange_data$fac_main_cate,
