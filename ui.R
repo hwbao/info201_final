@@ -116,8 +116,12 @@ shinyUI(
                           plotlyOutput("backers")
                         )
                       )
-             )
+             ),
              #-------------------------------------------------------------#
+            tags$footer(
+              img(id = "ar_logo" , src='footer.png', width = "350px",
+                  height = "80px", align = "right")
+            )
   )
   
   
