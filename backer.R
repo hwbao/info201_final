@@ -32,7 +32,7 @@ draw_backer_project_relationship <- function(data, project_name) {
                    layout(title = "Backer's Average Investment",
                           font = list(color = "#C0C0C0"),
                           xaxis = list(title = "Category"),
-                          yaxis = list(title = "Average Pledged"),
+                          yaxis = list(title = "Average Pledged (USD)"),
                           paper_bgcolor = "#010402",
                           plot_bgcolor = "#010402",
                           showlegend = TRUE)

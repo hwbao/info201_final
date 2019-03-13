@@ -59,7 +59,7 @@ draw_sankey_graph <- function(kickstarter) {
                                     label = arrange_data$hoverinfo)
   ) %>%
     layout(
-      title = "Total Pledged Each Category Get and Distribution to Their Sub Category",
+      title = "Total Pledged(USD) Each Category Get and Distribution to Their Sub Category",
       font = list(
         size = 11,
         color = "#C0C0C0"
