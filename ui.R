@@ -2,6 +2,7 @@ library("shiny")
 library("plotly")
 
 shinyUI(
+  tags$div( id = "container",
   navbarPage(img(id = "kickstart_logo" , src='kickstarter_white.png', width = "250px",
                  height = "50px", align = "top"),
              theme = "style.css",
@@ -112,6 +113,7 @@ shinyUI(
                       )
              )
              #-------------------------------------------------------------#
+  )
   )
 )
 

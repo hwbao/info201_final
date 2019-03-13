@@ -2,10 +2,40 @@
 @import url( "https://fonts.googleapis.com/css?family=Roboto:300")
 
 
-body{
-    font-family: 'Roboto', sans-serif;
-    width: 80%;
+#test {
+
 }
+
+html {
+    position: relative;
+    display: table;
+    min-width: 80%;
+    min-height: 80%;
+    height: 100%;
+    vertical-align: middle;
+}
+
+#container {
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    /*display: table-cell;
+    vertical-align: middle;*/
+}
+
+/* Header/logo Title */
+.header {
+    padding: 80px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+  }
 
 p{
     font-family: 'Roboto', sans-serif;
@@ -17,6 +47,10 @@ p{
     font-family: Arial;
     font-size: 13px;
     color: rgb(255, 255, 255) ;
+}
+
+.tabPanel {
+    background-color: black;
 }
 
 .img {
@@ -34,7 +68,18 @@ p{
     color: white;
 }
 
-#tab{
-    font-size: 15px;
-    color: white;
+.tabs-above > .nav > li[class=active] > a {
+    background-color: #000;
+    color: #FFF;
+ }
+
+
+
+.nav-tabs-custom .nav-tabs li.active:hover a, .nav-tabs-custom .nav-tabs li.active a {
+        background-color: transparent;
+        border-color: transparent;
+}
+   
+.nav-tabs-custom .nav-tabs li.active {
+    border-top-color: #FFF;
 }
