@@ -11,7 +11,7 @@ new_data <- kickstarter %>%
   dplyr::group_by(main_category, category) %>%
   dplyr::summarize(category_pledged = sum(usd_pledged_real)) %>% 
   ungroup() %>%
-  top_n(as.numeric(20), wt=category_pledged)
+  top_n(as.numeric(top), wt=category_pledged)
 
 new_data$fac_main_cate <- as.numeric(factor(new_data$main_category)) - 1
 
