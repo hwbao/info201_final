@@ -33,6 +33,8 @@ m <- list(
   draw_graph <- plot_ly(type = "sankey", 
                         domain = list(x =  c(0,1), y =  c(0,1)),
                         orientation = "h",
+                        valueformat = ".0f",
+                        valuesuffix = "TWh",
                         
                         node = list(
                           # label = c(new_data$fac_main_cate, new_data$fac_cate),
@@ -54,7 +56,7 @@ m <- list(
       title = "Total pledged each category get and distribution to their sub category",
       font = list(
         size = 11,
-        color = "white"
+        color = "#C0C0C0"
       ),
       xaxis = list(showgrid = T, zeroline = T),
       yaxis = list(showgrid = F, zeroline = F),

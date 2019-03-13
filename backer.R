@@ -27,9 +27,12 @@ draw_backer_project_relationship <- function(data, project_name) {
                           y = ~avg,
                           text = ~description,
                           type = "bar",
-                          name = ~category
-                          ) %>%
-                   layout(yaxis = list(title = "average pledged"))
-  return(draw_each_sub)
-}  
+                          name = ~category) %>%
+                   layout(title = "Backer's average investment",
+                          font = list(color = "#C0C0C0"),
+                          yaxis = list(title = "average pledged"),
+                          paper_bgcolor = "black",
+                          plot_bgcolor = "black",
+                          showlegend = TRUE)
+} 
 
