@@ -113,7 +113,6 @@ shinyUI(
                                         "All Category" = "category"
                                       )
                           )
-                          
                         ),
                         
                         mainPanel(
