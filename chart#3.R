@@ -39,14 +39,14 @@ find_rate <- function(data, input_category, input_year) {
     size = ~total_backers,
     color = ~main_category,
     colors = "Paired",
-    sizes = c(min(test_df$total_backers) / 300, max(test_df$total_backers) / 300),
+    sizes = c(min(modified_df$total_backers) / 300, max(modified_df$total_backers) / 300),
     marker = list(
       symbol = "circle", opacity = 0.7, sizemode = "area",
       line = list(width = 2, color = "#FFFFFF")
     ),
     hoverinfo = "text",
     lengendgroup = ~main_category,
-    text = ~ paste(
+    text = ~paste(
       "Category:", main_category,
       "<br>Success Rate:", success_rate,
       "<br>Amount Projects:", total_projects,

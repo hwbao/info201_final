@@ -2,7 +2,7 @@ library(dplyr)
 library(plotly)
 
 source("backer.R")
-#source("chart#3.R")
+source("chart#3.R")
 source("average goal.R")
 source("scripts/initial_info.R")
 source("total_backer.R")
@@ -23,7 +23,7 @@ shinyServer(function(input, output) {
     num_rows(data)
   }) 
   
-  output$rate <- renderPlotly({ 
+  output$testing <- renderPlotly({ 
     find_rate(data, "main_category", as.numeric(input$year))
   }) 
   
@@ -39,7 +39,7 @@ shinyServer(function(input, output) {
     draw_backer_project_relationship(data, input$type_project)
   })
   
-  output$snakey <- renderPlotly({
-    draw_sankey_graph(kickstarter, input$top_snakey)
+  output$sankey <- renderPlotly({
+    draw_sankey_graph(data, input$top_project)
   })
 })
