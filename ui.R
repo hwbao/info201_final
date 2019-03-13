@@ -141,11 +141,12 @@ shinyUI(
                      tags$div(id = "snakey",
                      titlePanel(tags$h5("Where")),
                      sidebarLayout(
+                       sidebarPanel(
                        sliderInput("top_project", 
                                    label = "Please choose the top amount of data you want to see",
                                    min = 0, max = 50,
                                    value = 20
-                       ),
+                       )),
                        
                        mainPanel(
                          plotlyOutput("sankey")
