@@ -1,14 +1,30 @@
 library("shiny")
 library("plotly")
+library("shinythemes")
 
 shinyUI(
-  tags$div( id = "container",
-  navbarPage(img(id = "kickstart_logo" , src='kickstarter_white.png', width = "250px",
+  
+  navbarPage(
+    
+    
+    img(id = "kickstart_logo" , src='kickstarter_white.png', width = "250px",
                  height = "50px", align = "top"),
-             theme = "style.css",
+                 theme = shinytheme("cyborg"),
+    
+    tags$head(
+      tags$style(HTML("
+      
+      
+      body {
+            max-width: 1500px;
+            margin: 0 auto;
+      }
+
+    "))
+    ),
              
   
-            tabPanel(tags$div(id = "tab", icon = icon("home"), tags$p(id = "test",  "Home")), 
+            tabPanel( "Home", icon = icon("home"), 
                     titlePanel("Home"),
                     img(id = "logo" , src='ar.png', width = "80px",
                           height = "60px", align = "top"),
@@ -106,6 +122,7 @@ shinyUI(
              )
              #-------------------------------------------------------------#
   )
-  )
+  
+  
 )
 
