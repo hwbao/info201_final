@@ -21,7 +21,15 @@ arrange_data <- new_data %>%
 arrange_data$fac_cate <- as.numeric(factor(arrange_data$category)) +
                                     length(unique(arrange_data$main_category))
 
-  
+
+m <- list(
+  l = 50,
+  r = 50,
+  b = 100,
+  t = 100,
+  pad = 4
+)
+
   draw_graph <- plot_ly(type = "sankey", 
                         domain = list(x =  c(0,1), y =  c(0,1)),
                         orientation = "h",
@@ -42,6 +50,7 @@ arrange_data$fac_cate <- as.numeric(factor(arrange_data$category)) +
                                     color = "#4BC3B5")
                       ) %>%
     layout(
+      autosize = T, margin = m,
       title = "Total pledged each category get and distribution to their sub category",
       font = list(
         size = 11,

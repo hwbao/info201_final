@@ -56,8 +56,7 @@ shinyUI(
                         ),
                         
                         mainPanel(
-                          #plotlyOutput("rate")
-                          p("testing")
+                          plotlyOutput("rate")
                         )
                       )
              ),
@@ -97,14 +96,7 @@ shinyUI(
                       titlePanel("Backer's Investment Information"),
                       sidebarLayout(
                         sidebarPanel(
-                          selectInput("type_project",
-                                      label = "Choose the Type of project",
-                                      choices = list(
-                                        "Art" = "Art",
-                                        "Food" = "Food"
-                                      )
-                          
-                                      )
+                          uiOutput("backer_ui")
                         ),
                         
                         mainPanel(

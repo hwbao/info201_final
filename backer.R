@@ -16,15 +16,19 @@ draw_backer_project_relationship <- function(data, project_name) {
            description = paste0(category,
                                 "'s average pledge from each backer is $",
                                 avg)
-           )
+           ) %>% 
+    arrange(-avg)
   
+  select_project$category <- factor(select_project$category, 
+                        levels = c(as.character(select_project$category)))
   
   draw_each_sub <- plot_ly(select_project,
-                          x = select_project$category,
-                          y = select_project$avg,
+                          x = ~category,
+                          y = ~avg,
                           text = ~description,
                           type = "bar",
-                          name = select_project$category) %>%
+                          name = ~category
+                          ) %>%
                    layout(yaxis = list(title = "average pledged"))
   return(draw_each_sub)
 }  

@@ -19,12 +19,20 @@ shinyServer(function(input, output) {
     )
   })
   
+  output$backer_ui <- renderUI({
+    selectInput(
+      "type_project",
+      label = "Please choose the category you are interested in",
+      choices = as.list((main_cat_list(data)))
+    )
+  })
+  
   output$num_rows <- renderText({ 
     num_rows(data)
   }) 
   
-  output$testing <- renderPlotly({ 
-    find_rate(data, "main_category", as.numeric(input$year))
+  output$rate <- renderPlotly({ 
+    find_rate(data, as.numeric(input$year))
   }) 
   
   output$mean_goal_main_category <- renderPlotly({ 
