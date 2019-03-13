@@ -5,9 +5,7 @@ library(plotly)
 # Read the data about kickstarter and convert it into a dataframe
 kickstarter <- read.csv("data/ks_projects_201801.csv", stringsAsFactors = F)
 
-top <- "20"
-
-#draw_sankey_graph <- function(kickstarter, top) {
+draw_sankey_graph <- function(kickstarter, top) {
 new_data <- kickstarter %>%
   dplyr::filter(main_category != category) %>%
   dplyr::group_by(main_category, category) %>%
@@ -67,7 +65,7 @@ m <- list(
       paper_bgcolor = "#1C2C54"
     )
 
-  #return(draw_graph)
-#}
+  return(draw_graph)
+}
   
   
