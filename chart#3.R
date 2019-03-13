@@ -62,12 +62,8 @@ find_rate <- function(data, input_year) {
     )
   ) %>%
     layout(
-<<<<<<< HEAD
-      title = "Amount Projects vs. Success Rates of Each Category",
-=======
       autosize = T, margin = m,
       title = "Success Rates vs. Amount Projects of Each Category",
->>>>>>> 7a8ea7e497a0c2cf13c0010b6b9222ed37c75cea
       font = list(color = "#C0C0C0"),
       xaxis = list(
         title = "Amount Projects",
