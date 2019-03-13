@@ -13,22 +13,48 @@ shinyUI(
     
     tags$head(
       tags$style(HTML("
-      
+      html, body {
+            min-height:100%;
+            overflow:auto;
+      }      
+
+      #snakey {
+        position:relative;
+        min-height: 1000px;
+        /* equal to footer height */
+        margin-bottom: -142px; 
+      }
+
       .navbar { 
             font-family: 'Roboto';
-            color: rgb(221, 221, 221) ;
-                      }
+            color: rgb(178, 178, 178) ;
+      }
       body {
+            min-height:100%;
             max-width: 1500px;
             margin: 0 auto;
-            letter-spacing: 3px;
-            color:rgb(221, 221, 221);
+            letter-spacing: 2.5px;
+            font-size : 12pt;
+            color:rgb(178, 178, 178);
+            
       }
       footer {
+            font-family: 'Roboto';
             margin-top: 100px;
+            position: -ms-page;
+            bottom:0;
+            height:60px;
+            text-align: right;
       }
       #intro {
             max-width: 624px;
+      }
+      #container {
+           min-height: 100%; /* will cover the 100% of viewport */
+           overflow: hidden;
+           display: block;
+           position: relative;
+           padding-bottom: 100px; /* height of your footer */
       }
 
     "))
@@ -38,31 +64,42 @@ shinyUI(
             tabPanel( "Home", icon = icon("home"), 
                     titlePanel(tags$h5("Home")),
                      
-            tags$div( id = "intro",
+            tags$div(id = "intro",
+              tags$div(id = "container", 
+              
               tags$a(href = "https://www.kickstarter.com", "Kickstarter"),
               "is a global crowdfunding platform that focuses on 
               creativity and merchandising. Kickstarter has reportedly received 
               more than $4 billion in pledges from 15.5 million backers to fund 
               257,000 creative projects, such as films, music, video games, etc. 
               We have found our dataset about Kickstarter from the",
-              tags$a(href = "https://www.kaggle.com/kemical/kickstarter-projects", "Kaggle Platform"),
-              
+              tags$a(href = "https://www.kaggle.com/kemical/kickstarter-projects", "Kaggle Platform"), 
+              "."
+              ,tags$div(id = "intro",
               "This data includes total of 378661 observations from 2009 to 2018 including 
               different features such as name of the kickstarter project, category of the 
               project, goals for fundraising, duration of the fundraising process, amount of 
-              money raised, and the status of the project(successful, fail, cancel, etc.)
-              Through our team's analysis, we have analyzed this data in terms of the 
+              money raised, and the status of the project(successful, fail, cancel, etc.)")
+              
+              ,tags$div(id = "intro",
+              "Through our team's analysis, we have analyzed this data in terms of the 
               relationship and the trend of the successful rate with different category over 
               years, the average fundraising goal of a project, and the average amount of 
               money a backer would be willing to give. 
               We have created this website to proudly present our finding about the 
-              kickstarter dataset."
-            )            
+              kickstarter dataset.")
+              
+              ,tags$h5("About us"),
+              tags$div(id = "intro",
+              "We are Ar Analysis from INFO 201, section BC.")
+            
+            )
+            )
             ),
              
              #--------------------------Success Rate----------------#
              tabPanel("Success Rate", icon = icon("star-half-alt"),
-                      titlePanel(tags$h5("Success Rate")),
+                      tags$div(id = "container", titlePanel(tags$h5("Success Rate")),
                       sidebarLayout(
                         sidebarPanel(
                           sliderInput("year", 
@@ -83,6 +120,7 @@ shinyUI(
                           plotlyOutput("rate")
                         )
                       )
+                      )
              ),
              #-------------------------------------------------------------#
              tabPanel("Goals", icon = icon("dollar-sign"),
@@ -101,6 +139,7 @@ shinyUI(
             
             #-------------------------------------------------------------#
             tabPanel("Pledged Money", icon = icon("dollar-sign"),
+                     tags$div(id = "snakey",
                      titlePanel(tags$h5("Where")),
                      sidebarLayout(
                        sliderInput("top_project", 
@@ -113,10 +152,12 @@ shinyUI(
                          plotlyOutput("sankey")
                        )
                      )
+                     )
             ),
              
              #-------------------------------------------------------------#
              tabPanel("Backer's Investment", icon = icon("hand-holding-usd"),
+                      tags$div(id = "container",
                       titlePanel(tags$h5("Backer's Investment Information")),
                       sidebarLayout(
                         sidebarPanel(
@@ -127,11 +168,11 @@ shinyUI(
                           plotlyOutput("backers")
                         )
                       )
+                      )
              ),
              #-------------------------------------------------------------#
             tags$footer(
-              img(id = "ar_logo" , src='footer.png', width = "414px",
-                  height = "45px", align = "right" )
+              HTML("<p> Made By Ar Analysis  &copy 2019 </p>")
             )
   )
   

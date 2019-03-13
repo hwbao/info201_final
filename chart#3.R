@@ -82,30 +82,3 @@ find_rate <- function(data, input_year) {
     )
   return(babble_plot)
 }
-
-test_df <- find_rate(ks_data, 2016)
-
-find_line <- function(data, sub_category) {
-  modified_df <- data %>%
-    select(category, state, deadline) %>%
-    mutate(deadline = as.numeric(substring(deadline, 1, 4))) %>%
-    group_by(deadline) %>%
-    filter(category == sub_category) %>%
-    mutate(total_count = n()) %>%
-    filter(state == "successful") %>%
-    mutate(success = n()) %>%
-    mutate(success_rate = round(success / total_count * 100, 1)) %>%
-    select(category, success_rate, deadline) %>%
-    unique(by = deadline) %>%
-    ungroup(deadline) %>%
-    arrange(deadline)
-}
-
-p2 <- plot_ly(
-  test_line,
-  x = ~deadline,
-  y = ~success_rate,
-  type = "scatter",
-  mode = "lines+markers"
-)
-p2
