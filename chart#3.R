@@ -13,6 +13,14 @@ cat_num <- ks_data %>%
   filter(state == "successful") %>%
   mutate(num_count = n())
 
+my_color <- c("rgb(241, 188, 172)", "rgb(241, 171, 206)", "rgb(223, 172, 240)",
+              "rgb(170, 172, 240)", "rgb(128, 162, 227)", "rgb(167, 129, 226)",
+              "rgb(227, 129, 211)", "rgb(227, 127, 137)", "rgb(202, 84, 133)", 
+              "rgb(183, 87, 202)", "rgb(92, 86, 201)", "rgb(86, 164, 202)",
+              "rgb(54, 179, 178)", "rgb(47, 81, 176)", "rgb(111, 52, 176)",
+              "rgb(177, 50, 144)", "rgb(142, 51, 151)", "rgb(63, 50, 151)",
+              "rgb(49, 110, 151)", "rgb(52, 152, 118)")
+
 # rate for all main category, create an interactive babble chart
 find_rate <- function(data, input_year) {
   modified_df <- data %>%
@@ -35,7 +43,8 @@ find_rate <- function(data, input_year) {
     t = 100,
     pad = 4
   )
-  
+  size <- length(unique(modified_df$main_category))
+    
   babble_plot <- plot_ly(
     modified_df,
     x = ~total_projects,
@@ -48,7 +57,7 @@ find_rate <- function(data, input_year) {
     colors = "Paired",
     sizes = c(min(modified_df$total_backers) / 200,
               max(modified_df$total_backers) / 200),
-    marker = list(symbol = "circle", opacity = 0.7, sizemode = "area"),
+    marker = list(symbol = "circle", sizemode = "area", color = my_color[0:size]),
     hoverinfo = "text",
     legendgroup = ~main_category,
     text = ~paste(
@@ -98,14 +107,15 @@ line_plot <- function(data, input_sub_cate) {
     ungroup(deadline) %>%
     arrange(deadline)
   
+  
   p2 <- plot_ly(
     modified_df,
     x = ~deadline,
     y = ~success_rate,
     type = "scatter",
     mode = "lines+markers",
-    color = "#C0C0C0",
-    marker = list(color = "#C0C0C0")
+    color = "rgb(52, 152, 118)",
+    marker = list(color = "rgb(49, 110, 151)")
   ) %>% 
     layout(
       autosize = T, margin = m,
