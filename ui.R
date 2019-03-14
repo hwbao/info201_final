@@ -63,6 +63,10 @@ shinyUI(
       #intro {
             max-width: 624px;
       }
+      #graph_desc {
+            font-size:10pt;
+            max-width: 520px;
+      }
       #container {
            min-height: 100%; /* will cover the 100% of viewport */
            overflow: hidden;
@@ -137,9 +141,12 @@ shinyUI(
       icon = icon("star-half-alt"),
       tags$div(
         id = "container", titlePanel(tags$h5("Success Rate")),
+        tags$div(id = "graph_desc", HTML("This interactive timeline provides the information 
+                     about the successful rate for each <b>different category</b> of <i>Kickstarter projects</i> in each years")),
         sidebarLayout(
           sidebarPanel(
             id = "sidebar",
+            
             sliderInput("year",
               label = "Please choose the year you are interested in",
               min = 2009, max = 2017,
