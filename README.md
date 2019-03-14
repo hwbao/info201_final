@@ -1,7 +1,7 @@
-[<img src="www/Ar.png"
+[<img src="www/Ar.png" width= 200px height=150px
      alt="Kickstarter Data Visualization"
-     style="width: 120px;"/>](https://hwbao.shinyapps.io/info201_final/)
-## Click our logo to enter the website!
+/>](https://hwbao.shinyapps.io/info201_final/)
+## Click the Logo to enter the website!
 
 # Project Description
 
