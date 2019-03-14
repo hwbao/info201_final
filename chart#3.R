@@ -16,15 +16,17 @@ find_rate <- function(data, input_year) {
   modified_df <- data %>%
     select(main_category, state, deadline, backers) %>%
     mutate(deadline = as.numeric(substring(deadline, 1, 4))) %>%
-    group_by(main_category) %>%
-    filter(deadline == input_year) %>%
+    group_by(main_category, deadline) %>%
+    filter(deadline != 2018 || deadline != 2019) %>%
     mutate(total_projects = n(), total_backers = sum(backers)) %>%
     filter(state == "successful") %>%
     mutate(success = n()) %>%
     mutate(success_rate = round(success / total_projects * 100, 1)) %>%
-    select(main_category, success_rate, total_projects, total_backers) %>%
+    select(main_category, success_rate, total_projects, total_backers, deadline) %>%
+    #ungroup(main_category) %>% 
+    #group_by(deadline) %>% 
     unique(by = main_category) %>%
-    arrange(success_rate)
+    arrange(deadline)
   
   m <- list(
     l = 50,
@@ -35,16 +37,17 @@ find_rate <- function(data, input_year) {
   )
   size <- length(unique(modified_df$main_category))
     
-  babble_plot <- plot_ly(
-    modified_df,
+  babble_plot <- modified_df %>% 
+    plot_ly(
     x = ~total_projects,
     y = ~success_rate,
     name = ~main_category,
+    frame = ~deadline,
     type = "scatter",
     mode = "markers",
     size = ~total_backers,
     color = ~main_category,
-    colors = "Paired",
+    #colors = "Paired",
     sizes = c(min(modified_df$total_backers) / 200,
               max(modified_df$total_backers) / 200),
     marker = list(
