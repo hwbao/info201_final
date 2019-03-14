@@ -19,7 +19,7 @@ find_rate <- function(data, input_year) {
     select(main_category, state, deadline, backers) %>%
     mutate(deadline = as.numeric(substring(deadline, 1, 4))) %>%
     group_by(main_category, deadline) %>%
-    filter(deadline != 2018 || deadline != 2019) %>%
+    filter(deadline != 2018 && deadline != 2009) %>%
     mutate(total_projects = n(), total_backers = sum(backers)) %>%
     filter(state == "successful") %>%
     mutate(success = n()) %>%
