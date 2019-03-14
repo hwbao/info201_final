@@ -3,6 +3,7 @@ library("plotly")
 library("dplyr")
 library("lubridate")
 
+# Our customized color set
 my_color <- c(
   "rgb(241, 188, 172)", "rgb(241, 171, 206)", "rgb(223, 172, 240)",
   "rgb(170, 172, 240)", "rgb(128, 162, 227)", "rgb(167, 129, 226)",
@@ -13,7 +14,9 @@ my_color <- c(
   "rgb(49, 110, 151)", "rgb(52, 152, 118)"
 )
 
-# rate for all main category, create an interactive babble chart
+# Calculate success rate for all main category, returns an interactive 
+# babble chart with animation, including date, amount of projects, amount backer
+# for each main category
 find_rate <- function(data) {
   modified_df <- data %>%
     select(main_category, state, deadline, backers) %>%
@@ -28,11 +31,9 @@ find_rate <- function(data) {
       main_category, success_rate, total_projects,
       total_backers, deadline
     ) %>%
-    # ungroup() %>%
-    # group_by(main_category) %>%
     unique(by = main_category) %>%
     arrange(deadline)
-
+  
   m <- list(
     l = 50,
     r = 50,
@@ -40,7 +41,8 @@ find_rate <- function(data) {
     t = 100,
     pad = 4
   )
-
+  
+  # Draw an interactive babble chart with animation
   babble_plot <- plot_ly(
     modified_df,
     x = ~total_projects,
@@ -51,7 +53,6 @@ find_rate <- function(data) {
     mode = "markers",
     size = ~total_backers,
     color = ~main_category,
-    # colors = "Paired",
     sizes = c(
       min(modified_df$total_backers) / 200,
       max(modified_df$total_backers) / 200
@@ -59,14 +60,13 @@ find_rate <- function(data) {
     marker = list(
       symbol = "circle",
       sizemode = "area",
-      # color = my_color[0:size],
       line = list(width = 0)
     ),
     hoverinfo = "text",
     legendgroup = ~main_category,
     text = ~ paste(
       "Category:", main_category,
-      "<br>Success Rate:", success_rate,
+      "<br>Success Rate:", success_rate, "%",
       "<br>Amount Projects:", total_projects,
       "<br>Amount Backers:", total_backers
     )
@@ -99,6 +99,8 @@ find_rate <- function(data) {
   return(babble_plot)
 }
 
+# Calculate success rate for user chosen sub category, returns an interactive 
+# line chart
 line_plot <- function(data, input_sub_cate) {
   modified_df <- data %>%
     select(category, state, deadline) %>%
@@ -113,8 +115,8 @@ line_plot <- function(data, input_sub_cate) {
     unique(by = deadline) %>%
     ungroup(deadline) %>%
     arrange(deadline)
-
-
+  
+  # Draw a line plot
   p2 <- plot_ly(
     modified_df,
     x = ~deadline,
@@ -122,7 +124,12 @@ line_plot <- function(data, input_sub_cate) {
     type = "scatter",
     mode = "lines+markers",
     colors = "rgb(241, 171, 206)",
-    marker = list(color = "rgb(202, 84, 133)")
+    marker = list(color = "rgb(202, 84, 133)"),
+    hoverinfo = "text",
+    text = ~ paste(
+      "Year:", deadline,
+      "<br>Success Rate:", success_rate, "%"
+    )
   ) %>%
     layout(
       autosize = T, margin = m,
@@ -144,6 +151,6 @@ line_plot <- function(data, input_sub_cate) {
       paper_bgcolor = "transparent",
       plot_bgcolor = "transparent"
     )
-
+  
   return(p2)
 }

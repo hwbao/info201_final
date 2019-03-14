@@ -2,6 +2,7 @@ library("shiny")
 library("plotly")
 library("shinythemes")
 
+# Customized user interface
 shinyUI(
   navbarPage(
     img(id = "logo", src = "ar_white.png"),

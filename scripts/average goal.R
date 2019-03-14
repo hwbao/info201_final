@@ -9,6 +9,7 @@ m <- list(
   pad = 4
 )
 
+# Our customized color set 
 my_color <- c(
   "rgb(241, 188, 172)", "rgb(241, 171, 206)", "rgb(223, 172, 240)",
   "rgb(170, 172, 240)", "rgb(128, 162, 227)", "rgb(167, 129, 226)",
@@ -19,8 +20,8 @@ my_color <- c(
   "rgb(49, 110, 151)", "rgb(52, 152, 118)"
 )
 
-# Use group_by function to categorize by main category and then
-# Then use function select and summarize to get mean amount of goal
+# categorize by main category and then
+# calculates mean amount of goal, returns a bar chart
 main_category_analysis <- function(data) {
   main_category_df <- data %>%
     select(main_category, goal) %>%
@@ -41,16 +42,21 @@ main_category_analysis <- function(data) {
   p <- plot_ly(main_category_df,
     x = ~main_category,
     y = ~main_mean_goal,
-    text = ~description,
     type = "bar",
-    marker = list(color = my_color[0:size])
+    marker = list(color = my_color[0:size]),
+    hoverinfo = "text",
+    text = ~ paste(
+      "Category:", main_category,
+      "<br>Mean Goal:", main_mean_goal, "$", 
+      "<br>", description
+    )
   ) %>%
     layout(
       autosize = T, margin = m,
       title = "Average Goal for All Main Category",
       font = list(color = "#C0C0C0"),
       xaxis = list(title = "Main Category"),
-      yaxis = list(title = "Goal (USD)"),
+      yaxis = list(title = "Average Goal (USD)"),
       paper_bgcolor = "transparent",
       plot_bgcolor = "transparent"
     )
@@ -58,9 +64,9 @@ main_category_analysis <- function(data) {
   return(p)
 }
 
-# Our next job is to find average goal for sub category below each main category
-# We use group_by function first to categorize df then use select and summarize function
-# to get the average value for goal in each sub category
+# Find average goal for sub category below each main category
+# categorize df then calculates the average value for goal in each sub category,
+# returns a babble chart
 sub_category_analysis <- function(data, chosen_main_category) {
   sub_category_df <- data %>%
     filter(main_category == chosen_main_category) %>%
@@ -83,7 +89,6 @@ sub_category_analysis <- function(data, chosen_main_category) {
   pp <- plot_ly(sub_category_df,
     x = ~category,
     y = ~sub_mean_goal,
-    text = ~description,
     type = "scatter",
     mode = "markers",
     marker = list(
@@ -92,6 +97,12 @@ sub_category_analysis <- function(data, chosen_main_category) {
       color = my_color[0:size],
       opacity = 1,
       line = list(width = 0)
+    ),
+    hoverinfo = "text",
+    text = ~ paste(
+      "Category:", category,
+      "<br>Sub Mean Goal:", sub_mean_goal, "$",
+      "<br>", description
     )
   ) %>%
     layout(
@@ -99,7 +110,7 @@ sub_category_analysis <- function(data, chosen_main_category) {
       title = paste("Mean Goal for Sub Categories In", chosen_main_category),
       line = list(width = 0),
       xaxis = list(title = "Sub Category"),
-      yaxis = list(showgrid = FALSE, title = "Sub Category Goal (USD)"),
+      yaxis = list(showgrid = FALSE, title = "Sub Category Mean Goal (USD)"),
       font = list(color = "#C0C0C0"),
       paper_bgcolor = "transparent",
       plot_bgcolor = "transparent"

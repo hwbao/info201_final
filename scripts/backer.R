@@ -2,7 +2,7 @@
 library(dplyr)
 library(plotly)
 
-# Function to draw the graph for average amount of money
+# Function returns the graph for average amount of money
 # that a backer would give to a project in a given specific category
 draw_backer_project_relationship <- function(data, project_name) {
   my_color <- c(
@@ -41,11 +41,16 @@ draw_backer_project_relationship <- function(data, project_name) {
   draw_each_sub <- plot_ly(select_project,
     x = ~category,
     y = ~avg,
-    text = ~description,
     type = "bar",
     marker = list(color = my_color[0:size]),
     opacity = 1.5,
-    name = ~category
+    name = ~category,
+    hoverinfo = "text",
+    text = ~ paste(
+      "Category:", category,
+      "<br>Average:", avg, "$",
+      "<br>", description
+    )
   ) %>%
     layout(
       title = "Backer's Average Investment",
