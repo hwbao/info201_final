@@ -60,8 +60,9 @@ draw_sankey_graph <- function(kickstarter) {
                         orientation = "h",
                         
                         textfont = list(size = 16,
-                                        color = "rgb(194, 202, 214)"),
-                        opacity = 0.5,
+                                        color = "rgb(194, 202, 214)",
+                                        family = "Times New Roman"),
+                        opacity = 0,
                         
                         
                         node = list(
