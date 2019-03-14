@@ -1,8 +1,6 @@
 library("dplyr")
 library("plotly")
 
-kickstarter <- read.csv("./data/ks_projects_201801.csv", stringsAsFactors = FALSE)
-
 m <- list(
   l = 50,
   r = 50,
@@ -69,13 +67,16 @@ sub_category_analysis <- function(data, chosen_main_category) {
     group_by(category) %>%
     dplyr::summarize(sub_mean_goal = round(mean(goal))) %>%
     arrange(-sub_mean_goal) %>%
-    mutate(description = paste0("The Sub Category ", category, "'s Mean Goal is $", sub_mean_goal))
+    mutate(description = paste0(
+      "The Sub Category ",
+      category, "'s Mean Goal is $", sub_mean_goal
+    ))
 
   sub_category_df$category <- factor(sub_category_df$category,
     levels = c(as.character(sub_category_df$category))
   )
 
-  sizeref <- 2.0 * max(sub_category_df$sub_mean_goal) / (10**2)
+  sizeref <- 2.0 * max(sub_category_df$sub_mean_goal) / (10 ** 2)
 
   size <- length(unique(sub_category_df$category))
 

@@ -141,17 +141,13 @@ shinyUI(
       icon = icon("star-half-alt"),
       tags$div(
         id = "container", titlePanel(tags$h5("Success Rate")),
-        
+
         sidebarLayout(
           sidebarPanel(
             id = "sidebar",
             tags$div(id = "intro", HTML("This interactive timeline provides the information 
                      about the <b>successful rate</b> for each <b>different category</b> of <i>Kickstarter projects</i> in each years")),
-            sliderInput("year",
-              label = "Please choose the year you are interested in",
-              min = 2009, max = 2017,
-              value = 2009
-            ),
+
             HTML("<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> 
                                <br/> <br/> <br/> <br/> <br/> <br/> <br/>"),
             uiOutput("line_ui1"),
@@ -202,12 +198,9 @@ shinyUI(
         about the <b>flow</b> of the backers' investment. 
         The left side of the graph shows the main category, the right of the graph
         shows 3 different subcategories that received most amount of investment under each main category.
-        The width of the strips that's connecting each main and sub category represents the amount of investment."
-                                    
-        )),
+        The width of the strips that's connecting each main and sub category represents the amount of investment.")),
 
         plotlyOutput("sankey")
-        
       )
     ),
 
@@ -222,9 +215,7 @@ shinyUI(
             id = "sidebar",
             tags$div(id = "intro", HTML("This bar graph provides the information 
             of the average amount of money that a backer would give to a project 
-            in specific category according to the user's input<br/><br/>"
-                                        
-            )),
+            in specific category according to the user's input<br/><br/>")),
             uiOutput("backer_ui")
           ),
 

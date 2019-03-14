@@ -6,13 +6,6 @@ library(plotly)
 kickstarter <- read.csv("data/ks_projects_201801.csv", stringsAsFactors = F)
 
 draw_sankey_graph <- function(kickstarter) {
-  # new_data <- kickstarter %>%
-  # dplyr::filter(main_category != category) %>%
-  # dplyr::group_by(main_category, category) %>%
-  # dplyr::summarize(category_pledged = sum(usd_pledged_real)) %>%
-  # ungroup() %>%
-  # top_n(as.numeric(top), wt=category_pledged)
-
   my_color <- c(
     "rgb(241, 188, 172)", "rgb(241, 188, 172)", "rgb(241, 188, 172)",
     "rgb(241, 171, 206)", "rgb(241, 171, 206)", "rgb(241, 171, 206)",
@@ -96,7 +89,8 @@ draw_sankey_graph <- function(kickstarter) {
     )
   ) %>%
     layout(
-      title = "Total Pledged(USD) Within Each Category and its top 3 Distribution to Sub Categories",
+      title = "Total Pledged(USD) Within Each Category and
+      its top 3 Distribution to Sub Categories",
       font = list(
         size = 11,
         color = "#C0C0C0"

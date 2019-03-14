@@ -14,7 +14,7 @@ my_color <- c(
 )
 
 # rate for all main category, create an interactive babble chart
-find_rate <- function(data, input_year) {
+find_rate <- function(data) {
   modified_df <- data %>%
     select(main_category, state, deadline, backers) %>%
     mutate(deadline = as.numeric(substring(deadline, 1, 4))) %>%
@@ -24,9 +24,12 @@ find_rate <- function(data, input_year) {
     filter(state == "successful") %>%
     mutate(success = n()) %>%
     mutate(success_rate = round(success / total_projects * 100, 1)) %>%
-    select(main_category, success_rate, total_projects, total_backers, deadline) %>%
-    #ungroup() %>% 
-    #group_by(main_category) %>% 
+    select(
+      main_category, success_rate, total_projects,
+      total_backers, deadline
+    ) %>%
+    # ungroup() %>%
+    # group_by(main_category) %>%
     unique(by = main_category) %>%
     arrange(deadline)
 
@@ -37,7 +40,6 @@ find_rate <- function(data, input_year) {
     t = 100,
     pad = 4
   )
-  #size <- length(unique(modified_df$main_category))
 
   babble_plot <- plot_ly(
     modified_df,
@@ -49,7 +51,7 @@ find_rate <- function(data, input_year) {
     mode = "markers",
     size = ~total_backers,
     color = ~main_category,
-    #colors = "Paired",
+    # colors = "Paired",
     sizes = c(
       min(modified_df$total_backers) / 200,
       max(modified_df$total_backers) / 200
@@ -57,12 +59,12 @@ find_rate <- function(data, input_year) {
     marker = list(
       symbol = "circle",
       sizemode = "area",
-      #color = my_color[0:size],
+      # color = my_color[0:size],
       line = list(width = 0)
     ),
     hoverinfo = "text",
     legendgroup = ~main_category,
-    text = ~paste(
+    text = ~ paste(
       "Category:", main_category,
       "<br>Success Rate:", success_rate,
       "<br>Amount Projects:", total_projects,
@@ -90,7 +92,7 @@ find_rate <- function(data, input_year) {
       legend = list(font = list(color = "#C0C0C0")),
       paper_bgcolor = "transparent",
       plot_bgcolor = "transparent"
-    ) %>% 
+    ) %>%
     animation_slider(
       currentvalue = list(prefix = "YEAR ", font = list(color = "#C0C0C0"))
     )
@@ -111,8 +113,8 @@ line_plot <- function(data, input_sub_cate) {
     unique(by = deadline) %>%
     ungroup(deadline) %>%
     arrange(deadline)
-  
-  
+
+
   p2 <- plot_ly(
     modified_df,
     x = ~deadline,
@@ -121,14 +123,14 @@ line_plot <- function(data, input_sub_cate) {
     mode = "lines+markers",
     colors = "rgb(241, 171, 206)",
     marker = list(color = "rgb(202, 84, 133)")
-  ) %>% 
+  ) %>%
     layout(
       autosize = T, margin = m,
       title = paste("Success Rates in Years of", input_sub_cate),
       font = list(color = "#C0C0C0"),
       xaxis = list(
         title = "Years",
-        color = "#C0C0C0", 
+        color = "#C0C0C0",
         zerolinewidth = 1,
         ticklen = 2,
         gridwidth = 1
@@ -142,6 +144,6 @@ line_plot <- function(data, input_sub_cate) {
       paper_bgcolor = "transparent",
       plot_bgcolor = "transparent"
     )
-  
+
   return(p2)
 }
