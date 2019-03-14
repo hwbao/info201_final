@@ -3,13 +3,10 @@ library("plotly")
 library("shinythemes")
 
 shinyUI(
-  
   navbarPage(
-    
-    
-    img(id = "logo" , src='ar_white.png'),
-                 theme = shinytheme("cyborg"),
-    
+    img(id = "logo", src = "ar_white.png"),
+    theme = shinytheme("cyborg"),
+
     tags$head(
       tags$style(HTML("
       html, body {
@@ -87,122 +84,134 @@ shinyUI(
 
     "))
     ),
-             
-  
-            tabPanel( "Home", icon = icon("home"), 
-                    titlePanel(tags$h5("Home")),
-                     
-            tags$div(id = "intro",
-              tags$div(id = "container", 
-              
-              tags$a(href = "https://www.kickstarter.com", "Kickstarter"),
-              "is a global crowdfunding platform that focuses on 
+
+
+    tabPanel("Home",
+      icon = icon("home"),
+      titlePanel(tags$h5("Home")),
+
+      tags$div(
+        id = "intro",
+        tags$div(
+          id = "container",
+
+          tags$a(href = "https://www.kickstarter.com", "Kickstarter"),
+          "is a global crowdfunding platform that focuses on 
               creativity and merchandising. Kickstarter has reportedly received 
               more than $4 billion in pledges from 15.5 million backers to fund 
               257,000 creative projects, such as films, music, video games, etc. 
               We have found our dataset about Kickstarter from the",
-              tags$a(href = "https://www.kaggle.com/kemical/kickstarter-projects", "Kaggle Platform"), 
-              "."
-              ,tags$div(id = "intro",
-              "This data includes total of 378661 observations from 2009 to 2018 including 
+          tags$a(href = "https://www.kaggle.com/kemical/kickstarter-projects", "Kaggle Platform"),
+          ".",
+          tags$div(
+            id = "intro",
+            "This data includes total of 378661 observations from 2009 to 2018 including 
               different features such as name of the kickstarter project, category of the 
               project, goals for fundraising, duration of the fundraising process, amount of 
-              money raised, and the status of the project(successful, fail, cancel, etc.)")
-              
-              ,tags$div(id = "intro",
-              "Through our team's analysis, we have analyzed this data in terms of the 
+              money raised, and the status of the project(successful, fail, cancel, etc.)"
+          ),
+          tags$div(
+            id = "intro",
+            "Through our team's analysis, we have analyzed this data in terms of the 
               relationship and the trend of the successful rate with different category over 
               years, the average fundraising goal of a project, and the average amount of 
               money a backer would be willing to give. 
               We have created this website to proudly present our finding about the 
-              kickstarter dataset.")
-              ,HTML("<p>  &nbsp </p>")
-              ,img(src='ar_white.png', width="60px", height="40px"),tags$h5("About us"),
-              tags$div(id = "intro",
-              "We are Ar Analysis from INFO 201, section BC. 
-              "),
-              tags$div(id = "intro", "Our group members: "),
-              tags$div(id = "intro", "  -- Haowen Bao,
+              kickstarter dataset."
+          ),
+          HTML("<p>  &nbsp </p>"), img(src = "ar_white.png", width = "60px", height = "40px"), tags$h5("About us"),
+          tags$div(
+            id = "intro",
+            "We are Ar Analysis from INFO 201, section BC. 
+              "
+          ),
+          tags$div(id = "intro", "Our group members: "),
+          tags$div(id = "intro", "  -- Haowen Bao,
                        Zexin Lyu, Ruijun Guo, Yutian Lei")
-            
-            )
-            )
-            ),
-             
-             #--------------------------Success Rate----------------#
-             tabPanel("Success Rate", icon = icon("star-half-alt"),
-                      tags$div(id = "container", titlePanel(tags$h5("Success Rate")),
-                      sidebarLayout(
-                        sidebarPanel(id = "sidebar",
-                          sliderInput("year", 
-                                      label = "Please choose the year you are interested in",
-                                      min = 2009, max = 2017,
-                                      value = 2009
-                          ),
-                          HTML("<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> 
-                               <br/> <br/> <br/> <br/> <br/> <br/> <br/>"),
-                          uiOutput("line_ui1"),
-                          uiOutput("line_ui2")
-                          ),
-                        mainPanel(
-                          plotlyOutput("rate"),
-                          plotlyOutput("line_rate")
-                        )
-                      )
-                      )
-             ),
-             #-------------------------------------------------------------#
-             tabPanel("Goals", icon = icon("dollar-sign"),
-                      titlePanel(
-                       
-                        tags$h5("Average Goals")),
-                        sidebarLayout(
-                          
-                          sidebarPanel(id = "sidebar",
-                            uiOutput("categories")
-                          ),
-                          
-                          mainPanel(
-                            plotlyOutput("mean_goal_main_category"),
-                            plotlyOutput("mean_goal_sub_category")
-                          ),
-                          position = "left"
-                      )
-             ),
-            
-            #-------------------------------------------------------------#
-            tabPanel("Investment Flows", icon = icon("location-arrow"),
-                     tags$div(id = "sankey",
-                     titlePanel(tags$h5("Where do the backers' investment go?")),
-                     
-                       
-                         plotlyOutput("sankey")
-                       
-                     
-                     )
-            ),
-             
-             #-------------------------------------------------------------#
-             tabPanel("Backer's Investment", icon = icon("hand-holding-usd"),
-                      tags$div(id = "container",
-                      titlePanel(tags$h5("Backer's Investment Information")),
-                      sidebarLayout(
-                        sidebarPanel(id = "sidebar",
-                          uiOutput("backer_ui")
-                        ),
-                        
-                        mainPanel(
-                          plotlyOutput("backers")
-                        )
-                      )
-                      )
-             ),
-             #-------------------------------------------------------------#
-            tags$footer(
-              HTML("<p> Made By Ar Analysis  &copy 2019 </p>")
-            )
-  )
-  
-  
-)
+        )
+      )
+    ),
 
+    #--------------------------Success Rate----------------#
+    tabPanel("Success Rate",
+      icon = icon("star-half-alt"),
+      tags$div(
+        id = "container", titlePanel(tags$h5("Success Rate")),
+        sidebarLayout(
+          sidebarPanel(
+            id = "sidebar",
+            sliderInput("year",
+              label = "Please choose the year you are interested in",
+              min = 2009, max = 2017,
+              value = 2009
+            ),
+            HTML("<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> 
+                               <br/> <br/> <br/> <br/> <br/> <br/> <br/>"),
+            uiOutput("line_ui1"),
+            uiOutput("line_ui2")
+          ),
+          mainPanel(
+            plotlyOutput("rate"),
+            plotlyOutput("line_rate")
+          )
+        )
+      )
+    ),
+    #-------------------------------------------------------------#
+    tabPanel("Goals",
+      icon = icon("dollar-sign"),
+
+      sidebarLayout(
+
+        sidebarPanel(
+          id = "sidebar",
+          tags$h5("Average Goals"),
+          HTML("<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> 
+                               <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>"),
+          uiOutput("categories")
+        ),
+
+        mainPanel(
+          plotlyOutput("mean_goal_main_category"),
+          plotlyOutput("mean_goal_sub_category")
+        ),
+        position = "left"
+      )
+    ),
+
+    #-------------------------------------------------------------#
+    tabPanel("Investment Flows",
+      icon = icon("location-arrow"),
+      tags$div(
+        id = "sankey",
+        titlePanel(tags$h5("Where do the backers' investment go?")),
+
+
+        plotlyOutput("sankey")
+      )
+    ),
+
+    #-------------------------------------------------------------#
+    tabPanel("Backer's Investment",
+      icon = icon("hand-holding-usd"),
+      tags$div(
+        id = "container",
+        titlePanel(tags$h5("Backer's Investment Information")),
+        sidebarLayout(
+          sidebarPanel(
+            id = "sidebar",
+            uiOutput("backer_ui")
+          ),
+
+          mainPanel(
+            plotlyOutput("backers")
+          )
+        )
+      )
+    ),
+    #-------------------------------------------------------------#
+    tags$footer(
+      HTML("<p> Made By Ar Analysis  &copy 2019 </p>")
+    )
+  )
+)
