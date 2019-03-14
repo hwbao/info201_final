@@ -2,7 +2,7 @@
 library(dplyr)
 library(plotly)
 
-# Function to draw the graph for average amount of money
+# Function returns the graph for average amount of money
 # that a backer would give to a project in a given specific category
 draw_backer_project_relationship <- function(data, project_name) {
   my_color <- c(

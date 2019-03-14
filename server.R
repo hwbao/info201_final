@@ -65,7 +65,7 @@ shinyServer(function(input, output) {
     main_category_analysis(data)
   })
 
-  # return bar chart
+  # return babble chart
   output$mean_goal_sub_category <- renderPlotly({
     sub_category_analysis(data, input$selected_main_category)
   })
