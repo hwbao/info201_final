@@ -5,14 +5,6 @@ library(plotly)
 # Read the data about kickstarter and convert it into a dataframe
 kickstarter <- read.csv("data/ks_projects_201801.csv", stringsAsFactors = F)
 
-my_color <- c("rgb(232, 129, 129)", "rgb(232, 206, 129)", "rgb(232, 211, 129)",
-              "rgb(216, 232, 129)", "rgb(166, 232, 129)", "rgb(129, 232, 180)",
-              "rgb(232, 129, 214)",
-              "rgb(129, 228, 232)", "rgb(129, 182, 232)", "rgb(129, 146, 232)", 
-              "rgb(142, 232, 129)", "rgb(158, 129, 232)", "rgb(185, 129, 232)", 
-              "rgb(195, 129, 232)", "rgb(218, 129, 232)",
-              "rgb(232, 129, 173)", "rgb(232, 129, 183)", "rgb(232, 129, 214)")
-
 draw_sankey_graph <- function(kickstarter) {
   #new_data <- kickstarter %>%
   # dplyr::filter(main_category != category) %>%
@@ -20,6 +12,14 @@ draw_sankey_graph <- function(kickstarter) {
   # dplyr::summarize(category_pledged = sum(usd_pledged_real)) %>% 
   # ungroup() %>%
   #top_n(as.numeric(top), wt=category_pledged)
+  
+  my_color <- c("rgb(241, 188, 172)", "rgb(241, 171, 206)", "rgb(223, 172, 240)",
+                "rgb(170, 172, 240)", "rgb(128, 162, 227)", "rgb(167, 129, 226)",
+                "rgb(227, 129, 211)", "rgb(227, 127, 137)", "rgb(202, 84, 133)", 
+                "rgb(183, 87, 202)", "rgb(92, 86, 201)", "rgb(86, 164, 202)",
+                "rgb(54, 179, 178)", "rgb(47, 81, 176)", "rgb(111, 52, 176)",
+                "rgb(177, 50, 144)", "rgb(142, 51, 151)", "rgb(63, 50, 151)",
+                "rgb(49, 110, 151)", "rgb(52, 152, 118)")
   
   new_data <- kickstarter %>%
     dplyr::filter(main_category != category) %>%
@@ -43,11 +43,11 @@ draw_sankey_graph <- function(kickstarter) {
   draw_graph <- plot_ly(type = "sankey", 
                         domain = list(x =  c(0,1), y =  c(0,1)),
                         orientation = "h",
-                        valueformat = ".0f",
-                        valuesuffix = "TWh",
                         width = 1080,
-                        height = 1000,
-                        textfont = list(size = 16),
+                        height = 1200,
+                        textfont = list(size = 16,
+                                        color = "rgb(194, 202, 214)"),
+                        
                         
                         node = list(
                           # label = c(new_data$fac_main_cate, new_data$fac_cate),
@@ -55,9 +55,9 @@ draw_sankey_graph <- function(kickstarter) {
                           label = c(unique(arrange_data$main_category),
                                     sort(unique(arrange_data$category),
                                          decreasing = F)),
-                          pad = 15,
-                          thickness = 10,
-                          colorScale = my_color[0:15],
+                          pad = 10,
+                          thickness = 15,
+                          color = my_color[0:20],
                           line = list(color = 'black', width = 0.5)
                         ),
                         
@@ -65,7 +65,8 @@ draw_sankey_graph <- function(kickstarter) {
                                     target = arrange_data$fac_cate,
                                     value =  arrange_data$category_pledged,
                                     label = arrange_data$hoverinfo,
-                                    color = "rgba(249, 242, 234, 0.7)")
+                                    line = list(width = 1),
+                                    color = my_color[0:20])
   ) %>%
     layout(
       title = "Total Pledged(USD) Each Category Get and Distribution to Their Sub Category",
@@ -73,10 +74,10 @@ draw_sankey_graph <- function(kickstarter) {
         size = 11,
         color = "#C0C0C0"
       ),
-      xaxis = list(showgrid = T, zeroline = T),
-      yaxis = list(showgrid = F, zeroline = F),
-      plot_bgcolor = "transparent",
-      paper_bgcolor = "transparent"
+      xaxis = list(showgrid = T, zeroline = T, showticklabels = F),
+      yaxis = list(showgrid = F, zeroline = F, showticklabels = F),
+      plot_bgcolor = "black",
+      paper_bgcolor = "black"
     )
   return(draw_graph)
 }

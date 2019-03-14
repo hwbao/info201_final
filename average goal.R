@@ -10,6 +10,15 @@ m <- list(
   t = 100,
   pad = 4
 )
+
+my_color <- c("rgb(241, 188, 172)", "rgb(241, 171, 206)", "rgb(223, 172, 240)",
+              "rgb(170, 172, 240)", "rgb(128, 162, 227)", "rgb(167, 129, 226)",
+              "rgb(227, 129, 211)", "rgb(227, 127, 137)", "rgb(202, 84, 133)", 
+              "rgb(183, 87, 202)", "rgb(92, 86, 201)", "rgb(86, 164, 202)",
+              "rgb(54, 179, 178)", "rgb(47, 81, 176)", "rgb(111, 52, 176)",
+              "rgb(177, 50, 144)", "rgb(142, 51, 151)", "rgb(63, 50, 151)",
+              "rgb(49, 110, 151)", "rgb(52, 152, 118)")
+
 # Use group_by function to categorize by main category and then
 # Then use function select and summarize to get mean amount of goal
 main_category_analysis <- function(data) {
@@ -24,14 +33,14 @@ main_category_analysis <- function(data) {
   main_category_df$main_category <- factor(main_category_df$main_category, 
                                            levels = c(as.character(main_category_df$main_category)))
   
+  size <- length(unique(main_category_df$main_category))
+    
   p <- plot_ly(main_category_df,
                x = ~main_category,
                y = ~main_mean_goal,
                text = ~description,  
                type = "bar",
-               color = ~main_category,
-               colors = "Paired",
-               opacity = 0.9
+               marker = list(color = my_color[0:size])
                ) %>%
     layout(autosize = T, margin = m,
            title = "Average Goal for All Main Category",
@@ -61,21 +70,25 @@ sub_category_analysis <- function(data, chosen_main_category){
   
   sizeref <- 2.0 * max(sub_category_df$sub_mean_goal) / (10**2)
   
+  size <- length(unique(sub_category_df$category))
+  
   pp <- plot_ly(sub_category_df,
                 x = ~category,
-                y = ~sub_mean_goal, 
+                y = ~sub_mean_goal,
                 text = ~description,
                 type = 'scatter',
                 mode = 'markers',
-                marker = list(size = ~sub_mean_goal, 
-                              sizeref = sizeref, color = "D175B7", line = list(width = 0) )) %>%
+                marker = list(size = ~sub_mean_goal,
+                              sizeref = sizeref,
+                              color = my_color[0:size],
+                              line = list(width = 0) )) %>%
     layout(autosize = T, margin = m,
            title = 'Mean Goal for Sub Categories In Each Main Category',
            xaxis = list(title = "Sub Category"),
            yaxis = list(showgrid = FALSE, title = "Sub Category Goal (USD)"),
            font = list(color = "#C0C0C0"),
-           paper_bgcolor = "#010402",
-           plot_bgcolor = "#010402")
+           paper_bgcolor = "transparent",
+           plot_bgcolor = "transparent")
   
   return(pp)
 }
