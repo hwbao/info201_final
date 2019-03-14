@@ -109,7 +109,7 @@ line_plot <- function(data, input_sub_cate) {
   ) %>% 
     layout(
       autosize = T, margin = m,
-      title = paste("Success Rates in Years of", category),
+      title = paste("Success Rates in Years of Sub Category"),
       font = list(color = "#C0C0C0"),
       xaxis = list(
         title = "Years",

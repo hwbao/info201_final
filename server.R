@@ -27,12 +27,32 @@ shinyServer(function(input, output) {
     )
   })
   
+  output$line_ui1 <- renderUI({
+    selectInput(
+      "line_main_category",
+      label = "Please choose the main category you are interested in",
+      choices = as.list((main_cat_list(data)))
+    )
+  })
+  
+  output$line_ui2 <- renderUI({
+    selectInput(
+      "line_sub_category",
+      label = "Please choose the sub category you are interested in",
+      choices = as.list((sub_cat_list(data, input$line_main_category)))
+    )
+  })
+  
   output$num_rows <- renderText({ 
     num_rows(data)
   }) 
   
   output$rate <- renderPlotly({ 
     find_rate(data, as.numeric(input$year))
+  }) 
+  
+  output$line_rate <- renderPlotly({ 
+    line_plot(data, input$line_sub_category)
   }) 
   
   output$mean_goal_main_category <- renderPlotly({ 
