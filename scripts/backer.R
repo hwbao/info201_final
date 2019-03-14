@@ -41,11 +41,16 @@ draw_backer_project_relationship <- function(data, project_name) {
   draw_each_sub <- plot_ly(select_project,
     x = ~category,
     y = ~avg,
-    text = ~description,
     type = "bar",
     marker = list(color = my_color[0:size]),
     opacity = 1.5,
-    name = ~category
+    name = ~category,
+    hoverinfo = "text",
+    text = ~ paste(
+      "Category:", category,
+      "<br>Average:", avg, "$",
+      "<br>", description
+    )
   ) %>%
     layout(
       title = "Backer's Average Investment",

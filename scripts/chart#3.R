@@ -66,7 +66,7 @@ find_rate <- function(data) {
     legendgroup = ~main_category,
     text = ~ paste(
       "Category:", main_category,
-      "<br>Success Rate:", success_rate,
+      "<br>Success Rate:", success_rate, "%",
       "<br>Amount Projects:", total_projects,
       "<br>Amount Backers:", total_backers
     )
@@ -124,7 +124,12 @@ line_plot <- function(data, input_sub_cate) {
     type = "scatter",
     mode = "lines+markers",
     colors = "rgb(241, 171, 206)",
-    marker = list(color = "rgb(202, 84, 133)")
+    marker = list(color = "rgb(202, 84, 133)"),
+    hoverinfo = "text",
+    text = ~ paste(
+      "Year:", deadline,
+      "<br>Success Rate:", success_rate, "%"
+    )
   ) %>%
     layout(
       autosize = T, margin = m,

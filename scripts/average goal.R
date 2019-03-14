@@ -42,16 +42,21 @@ main_category_analysis <- function(data) {
   p <- plot_ly(main_category_df,
     x = ~main_category,
     y = ~main_mean_goal,
-    text = ~description,
     type = "bar",
-    marker = list(color = my_color[0:size])
+    marker = list(color = my_color[0:size]),
+    hoverinfo = "text",
+    text = ~ paste(
+      "Category:", main_category,
+      "<br>Mean Goal:", main_mean_goal, "$", 
+      "<br>", description
+    )
   ) %>%
     layout(
       autosize = T, margin = m,
       title = "Average Goal for All Main Category",
       font = list(color = "#C0C0C0"),
       xaxis = list(title = "Main Category"),
-      yaxis = list(title = "Goal (USD)"),
+      yaxis = list(title = "Average Goal (USD)"),
       paper_bgcolor = "transparent",
       plot_bgcolor = "transparent"
     )
@@ -84,7 +89,6 @@ sub_category_analysis <- function(data, chosen_main_category) {
   pp <- plot_ly(sub_category_df,
     x = ~category,
     y = ~sub_mean_goal,
-    text = ~description,
     type = "scatter",
     mode = "markers",
     marker = list(
@@ -93,6 +97,12 @@ sub_category_analysis <- function(data, chosen_main_category) {
       color = my_color[0:size],
       opacity = 1,
       line = list(width = 0)
+    ),
+    hoverinfo = "text",
+    text = ~ paste(
+      "Category:", category,
+      "<br>Sub Mean Goal:", sub_mean_goal, "$",
+      "<br>", description
     )
   ) %>%
     layout(
@@ -100,7 +110,7 @@ sub_category_analysis <- function(data, chosen_main_category) {
       title = paste("Mean Goal for Sub Categories In", chosen_main_category),
       line = list(width = 0),
       xaxis = list(title = "Sub Category"),
-      yaxis = list(showgrid = FALSE, title = "Sub Category Goal (USD)"),
+      yaxis = list(showgrid = FALSE, title = "Sub Category Mean Goal (USD)"),
       font = list(color = "#C0C0C0"),
       paper_bgcolor = "transparent",
       plot_bgcolor = "transparent"
