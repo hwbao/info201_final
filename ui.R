@@ -16,8 +16,12 @@ shinyUI(
             min-height:100%;
             overflow:auto;
       }      
-      .sidebarPanel{
+      #sidebar{
             background-color: transparent;
+            text-align: left;
+      }
+      .sliderInput {
+            background-color: red;
       }
       #logo {
             width : 60px;
@@ -27,11 +31,12 @@ shinyUI(
             padding-bottom: 20px;
       }
 
-      #snakey {
+      #sankey {
         position:relative;
-        min-height: 1000px;
-        /* equal to footer height */
+        min-height: 1500px;
         margin-bottom: -142px; 
+        layout.autosize: true;
+        margin: 0 auto;
       }
 
       .navbar { 
@@ -67,6 +72,17 @@ shinyUI(
            display: block;
            position: relative;
            padding-bottom: 100px; /* height of your footer */
+      }
+
+      #node rect {
+          cursor: move;
+          fill-opacity: .9;
+          shape-rendering: crispEdges;
+      }
+      #node text {
+          color: white;
+          pointer-events: none;
+          text-shadow: 0 1px 0 #fff;
       }
 
     "))
@@ -117,7 +133,7 @@ shinyUI(
              tabPanel("Success Rate", icon = icon("star-half-alt"),
                       tags$div(id = "container", titlePanel(tags$h5("Success Rate")),
                       sidebarLayout(
-                        sidebarPanel(
+                        sidebarPanel(id = "sidebar",
                           sliderInput("year", 
                                       label = "Please choose the year you are interested in",
                                       min = 2009, max = 2017,
@@ -137,27 +153,31 @@ shinyUI(
              ),
              #-------------------------------------------------------------#
              tabPanel("Goals", icon = icon("dollar-sign"),
-                      titlePanel(tags$h5("Average Goals")),
-                      sidebarLayout(
-                        sidebarPanel(
-                          uiOutput("categories")
-                        ),
-                        
-                        mainPanel(
-                          plotlyOutput("mean_goal_main_category"),
-                          plotlyOutput("mean_goal_sub_category")
-                        )
+                      titlePanel(
+                       
+                        tags$h5("Average Goals")),
+                        sidebarLayout(
+                          
+                          sidebarPanel(id = "sidebar",
+                            uiOutput("categories")
+                          ),
+                          
+                          mainPanel(
+                            plotlyOutput("mean_goal_main_category"),
+                            plotlyOutput("mean_goal_sub_category")
+                          ),
+                          position = "left"
                       )
              ),
             
             #-------------------------------------------------------------#
-            tabPanel("Pledged Money", icon = icon("location-arrow"),
-                     tags$div(id = "snakey",
+            tabPanel("Investment Flows", icon = icon("location-arrow"),
+                     tags$div(id = "sankey",
                      titlePanel(tags$h5("Where do the backers' investment go?")),
                      
-                       mainPanel(
+                       
                          plotlyOutput("sankey")
-                       )
+                       
                      
                      )
             ),
@@ -167,7 +187,7 @@ shinyUI(
                       tags$div(id = "container",
                       titlePanel(tags$h5("Backer's Investment Information")),
                       sidebarLayout(
-                        sidebarPanel(
+                        sidebarPanel(id = "sidebar",
                           uiOutput("backer_ui")
                         ),
                         

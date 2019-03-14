@@ -81,9 +81,11 @@ sub_category_analysis <- function(data, chosen_main_category){
                 marker = list(size = ~sub_mean_goal,
                               sizeref = sizeref,
                               color = my_color[0:size],
+                              opacity = 1,
                               line = list(width = 0) )) %>%
     layout(autosize = T, margin = m,
            title = 'Mean Goal for Sub Categories In Each Main Category',
+           line = list(width = 0),
            xaxis = list(title = "Sub Category"),
            yaxis = list(showgrid = FALSE, title = "Sub Category Goal (USD)"),
            font = list(color = "#C0C0C0"),
