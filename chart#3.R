@@ -47,7 +47,11 @@ find_rate <- function(data, input_year) {
     colors = "Paired",
     sizes = c(min(modified_df$total_backers) / 200,
               max(modified_df$total_backers) / 200),
-    marker = list(symbol = "circle", sizemode = "area", color = my_color[0:size]),
+    marker = list(
+      symbol = "circle", 
+      sizemode = "area",
+      color = my_color[0:size],
+      line = list(width = 0)),
     hoverinfo = "text",
     legendgroup = ~main_category,
     text = ~paste(
