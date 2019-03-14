@@ -67,18 +67,18 @@ find_rate <- function(data, input_year) {
         color = "#C0C0C0", 
         zerolinewidth = 1,
         ticklen = 2,
-        gridwidth = 2
+        gridwidth = 1
       ),
       yaxis = list(
         title = "Success Rates (%)",
         color = "#C0C0C0",
-        range = c(0, 110),
+        range = c(0, 100),
         ticklen = 2,
-        gridwidth = 2
+        gridwidth = 1
       ),
       legend = list(font = list(color = "#C0C0C0")),
-      paper_bgcolor = "#010402",
-      plot_bgcolor = "#010402"
+      paper_bgcolor = "transparent",
+      plot_bgcolor = "transparent"
     )
   return(babble_plot)
 }
@@ -116,13 +116,13 @@ line_plot <- function(data, input_sub_cate) {
         color = "#C0C0C0", 
         zerolinewidth = 1,
         ticklen = 2,
-        gridwidth = 2
+        gridwidth = 1
       ),
       yaxis = list(
         title = "Success Rates (%)",
         color = "#C0C0C0",
         ticklen = 2,
-        gridwidth = 2
+        gridwidth = 1
       ),
       paper_bgcolor = "transparent",
       plot_bgcolor = "transparent"

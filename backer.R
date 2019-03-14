@@ -33,8 +33,8 @@ draw_backer_project_relationship <- function(data, project_name) {
                           font = list(color = "#C0C0C0"),
                           xaxis = list(title = "Category"),
                           yaxis = list(title = "Average Pledged (USD)"),
-                          paper_bgcolor = "#010402",
-                          plot_bgcolor = "#010402",
+                          paper_bgcolor = "transparent",
+                          plot_bgcolor = "transparent",
                           showlegend = TRUE)
 } 
 

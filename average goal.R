@@ -38,8 +38,8 @@ main_category_analysis <- function(data) {
            font = list(color = "#C0C0C0"),
            xaxis = list(title = "Main Category"),
            yaxis = list(title = "Goal (USD)"),
-           paper_bgcolor = "#010402",
-           plot_bgcolor = "#010402"
+           paper_bgcolor = "transparent",
+           plot_bgcolor = "transparent"
     )  
   
   return(p)
