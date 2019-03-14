@@ -61,7 +61,7 @@ draw_sankey_graph <- function(kickstarter) {
                         
                         textfont = list(size = 16,
                                         color = "rgb(194, 202, 214)",
-                                        family = "Times New Roman"),
+                                        family = "Roboto"),
                         opacity = 0,
                         
                         
