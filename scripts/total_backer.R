@@ -5,7 +5,10 @@ library(plotly)
 # Read the data about kickstarter and convert it into a dataframe
 kickstarter <- read.csv("data/ks_projects_201801.csv", stringsAsFactors = F)
 
+# Build the function to graph a sankey diagram which demonstrate where did the
+# pledged in each main category go (to which top three amount pledged category).
 draw_sankey_graph <- function(kickstarter) {
+  # create my own color vector for the link line of the sankey diagram
   my_color <- c(
     "rgb(241, 188, 172)", "rgb(241, 188, 172)", "rgb(241, 188, 172)",
     "rgb(241, 171, 206)", "rgb(241, 171, 206)", "rgb(241, 171, 206)",
@@ -29,6 +32,8 @@ draw_sankey_graph <- function(kickstarter) {
     "rgb(52, 152, 118)", "rgb(52, 152, 118)", "rgb(52, 152, 118)"
   )
 
+  # filter the data to keep only main category and their top three small 
+  # category with their pledged amount
   new_data <- kickstarter %>%
     dplyr::filter(main_category != category) %>%
     dplyr::group_by(main_category, category) %>%
@@ -41,17 +46,23 @@ draw_sankey_graph <- function(kickstarter) {
     )) %>%
     top_n(3, wt = category_pledged)
 
-
+  # to give specific number to main_category
   new_data$fac_main_cate <- as.numeric(factor(new_data$main_category)) - 1
 
+  # arrange the data with order
   arrange_data <- new_data %>%
     arrange(fac_main_cate)
 
+  # give different category their own code, and make sure they are not same
+  # witht the main category code
   arrange_data$fac_cate <- as.numeric(factor(arrange_data$category)) +
     length(unique(arrange_data$main_category)) - 1
 
+  # build the color into data frame so we can give the link of 
+  # same main category the same color
   arrange_data$color <- my_color[0:45]
 
+  #draw the sankey graph with the plotly
   draw_graph <- plot_ly(
     type = "sankey",
     domain = list(x = c(0, 1), y = c(0, 1)),
@@ -64,7 +75,7 @@ draw_sankey_graph <- function(kickstarter) {
     ),
     opacity = 0,
 
-
+    #create each node
     node = list(
       # label = c(new_data$fac_main_cate, new_data$fac_cate),
       # label = 0:34, # works!
@@ -80,6 +91,7 @@ draw_sankey_graph <- function(kickstarter) {
       line = list(color = "transparent", width = 0.5)
     ),
 
+    # create each node and give them color and hover infomation
     link = list(
       source = arrange_data$fac_main_cate,
       target = arrange_data$fac_cate,
