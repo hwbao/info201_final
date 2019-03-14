@@ -197,15 +197,15 @@ shinyUI(
     #-------------------------------------------------------------#
     tabPanel("Investment Flows",
       icon = icon("location-arrow"),
-      tags$div(
-        id = "sankey",
-        titlePanel(tags$h5("Where do the backers' investment go?")),
-        tags$div(id = "intro", HTML("This sankey diagram provides the information 
+      titlePanel(tags$h5("Where do the backers' investment go?")),
+      tags$div(id = "intro", HTML("This sankey diagram provides the information 
         about the <b>flow</b> of the backers' investment. 
         The left side of the graph shows the main category, the right of the graph
         shows 3 different subcategories that received most amount of investment under each main category.
-        The width of the strips that's connecting each main and sub category represents the amount of investment.")),
-
+        The width of the strips that's connecting each main and sub category 
+        represents the amount of investment.<br/><br/>")),
+      tags$div(
+        id = "sankey",
         plotlyOutput("sankey")
       )
     ),
