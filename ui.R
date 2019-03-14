@@ -64,7 +64,7 @@ shinyUI(
             max-width: 624px;
       }
       #graph_desc {
-            font-size:10pt;
+            font-size:9pt;
             max-width: 520px;
       }
       #container {
@@ -83,7 +83,7 @@ shinyUI(
       #node text {
           color: white;
           pointer-events: none;
-          text-shadow: 0 1px 0 #fff;
+          text-shadow: 0;
       }
 
     "))
@@ -123,10 +123,11 @@ shinyUI(
               We have created this website to proudly present our finding about the 
               kickstarter dataset."
           ),
-          HTML("<p>  &nbsp </p>"), img(src = "ar_white.png", width = "60px", height = "40px"), tags$h5("About us"),
+          HTML("<p>  &nbsp </p>"), img(src = "ar_white.png", width = "60px", height = "40px"), 
+          tags$h5("About us"),
           tags$div(
             id = "intro",
-            "We are Ar Analysis from INFO 201, section BC. 
+            "We are Ar Analysis from INFO 201 BC Wi 19. 
               "
           ),
           tags$div(id = "intro", "Our group members: "),
@@ -146,10 +147,14 @@ shinyUI(
           sidebarPanel(
             id = "sidebar",
             tags$div(id = "intro", HTML("This interactive timeline provides the information 
-                     about the <b>successful rate</b> for each <b>different category</b> of <i>Kickstarter projects</i> in each years")),
-
-            HTML("<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> 
-                               <br/> <br/> <br/> <br/> <br/> <br/> <br/>"),
+                  about the <b>success rate</b> for each 
+                  <b>different category</b> of <i>Kickstarter projects</i> in each year.")),
+            tags$div(id = "graph_desc", 
+                     HTML("<p><br/>&nbsp * Years without complete data are removed</p>")),
+            HTML("<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>"),
+            tags$div(id = "intro", HTML("This interactive line graph provides the trendline 
+                  of the <b>success rate</b> for each <b>specific subcategory</b> 
+                  throughout the years.<br/><br/>")),
             uiOutput("line_ui1"),
             uiOutput("line_ui2")
           ),
@@ -169,14 +174,15 @@ shinyUI(
         sidebarPanel(
           id = "sidebar",
           tags$h5("Average Goals"),
-          tags$div(HTML("This bar graph provides the information about the average goal(USD) 
-          for each main category.  <br/> 
-          Categories like <b>technology</b>, <b>films and videos</b> and <b>games</b> have relatively high average goal
-          while other categories like <b>dance</b>, <b>crafts</b> and <b>music</b> have a relatively lower average goal.
-
-
- <br/> <br/> <br/> <br/> <br/> 
-<br/> <br/> <br/> <br/> <br/> ")),
+          tags$div(HTML("This bar graph provides the information about the 
+          average goal(USD) for each main category.  <br/> <br/>
+          Categories like <b>technology</b>, <b>films and videos</b> 
+          and <b>games</b> have relatively high average goal
+          while other categories like <b>dance</b>, <b>crafts</b> and 
+          <b>music</b> have a relatively lower average goal.
+          <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> ")),
+          tags$div(id = "intro", HTML("This interactive bubble graph provides the information 
+                about the <b>average goal(USD)</b> for each <b>specific subcategory</b>.<br/><br/>")),
           uiOutput("categories")
         ),
 

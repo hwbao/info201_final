@@ -5,8 +5,8 @@ account: hwbao
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 786099
-bundleId: 1938360
+bundleId: 1940063
 url: https://hwbao.shinyapps.io/info201_final/
-when: 1552531236.41554
+when: 1552583113.12725
 asMultiple: FALSE
 asStatic: FALSE
