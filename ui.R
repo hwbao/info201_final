@@ -7,7 +7,7 @@ shinyUI(
   navbarPage(
     
     
-    img(id = "kickstart_logo" , src='kickstarter_white.png', width = "333px",
+    img(id = "kickstart_logo" , src='ar_white.png', width = "70px",
                  height = "50px", align = "top"),
                  theme = shinytheme("cyborg"),
     
@@ -88,10 +88,10 @@ shinyUI(
               money a backer would be willing to give. 
               We have created this website to proudly present our finding about the 
               kickstarter dataset.")
-              ,HTML("<p>/n</p>")
+              ,HTML("<p>  &nbsp </p>")
               ,tags$h5("About us"),
-              img(id = "ar_logo" , src='ar_white.png', width = "80px",
-                  height = "60px", align = "left"),
+              img(id = "ar_logo" , src='ar_white.png', width = "60px",
+                  height = "40px", align = "left"),
               tags$div(id = "intro",
               "We are Ar Analysis from INFO 201, section BC.")
             
@@ -138,18 +138,11 @@ shinyUI(
             tabPanel("Pledged Money", icon = icon("dollar-sign"),
                      tags$div(id = "snakey",
                      titlePanel(tags$h5("Where do the backers' investment go?")),
-                     sidebarLayout(
-                       sidebarPanel(
-                       sliderInput("top_project", 
-                                   label = "Please choose the top amount of data you want to see",
-                                   min = 0, max = 50,
-                                   value = 20
-                       )),
-                       
+                     
                        mainPanel(
                          plotlyOutput("sankey")
                        )
-                     )
+                     
                      )
             ),
              
