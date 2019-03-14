@@ -118,7 +118,7 @@ shinyUI(
           tags$div(
             id = "intro",
             "Through our team's analysis, we have analyzed this data in terms of the 
-              relationship and the trend of the successful rate with different category over 
+              relationship and the trend of the success rate with different categories over 
               years, the average fundraising goal of a project, and the average amount of 
               money a backer would be willing to give. 
               We have created this website to proudly present our finding about the 
