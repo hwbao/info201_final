@@ -2,16 +2,6 @@ library("shiny")
 library("plotly")
 library("dplyr")
 library("lubridate")
-ks_data <- read.csv("data/ks_projects_201801.csv", stringsAsFactors = F)
-# use for test
-cat_num <- ks_data %>%
-  select(main_category, state, deadline, backers) %>%
-  mutate(deadline = as.numeric(substring(deadline, 1, 4))) %>%
-  filter(deadline == 2016) %>%
-  group_by_("main_category") %>%
-  mutate(total = sum(backers)) %>%
-  filter(state == "successful") %>%
-  mutate(num_count = n())
 
 my_color <- c("rgb(241, 188, 172)", "rgb(241, 171, 206)", "rgb(223, 172, 240)",
               "rgb(170, 172, 240)", "rgb(128, 162, 227)", "rgb(167, 129, 226)",
