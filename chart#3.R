@@ -14,7 +14,7 @@ my_color <- c(
   "rgb(49, 110, 151)", "rgb(52, 152, 118)"
 )
 
-# Calculate success rate for all main category, create an interactive 
+# Calculate success rate for all main category, returns an interactive 
 # babble chart with animation, including date, amount of projects, amount backer
 # for each main category
 find_rate <- function(data) {
@@ -99,7 +99,7 @@ find_rate <- function(data) {
   return(babble_plot)
 }
 
-# Calculate success rate for user chosen sub category, create an interactive 
+# Calculate success rate for user chosen sub category, returns an interactive 
 # line chart
 line_plot <- function(data, input_sub_cate) {
   modified_df <- data %>%
