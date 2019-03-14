@@ -56,15 +56,16 @@ draw_sankey_graph <- function(kickstarter) {
                                     sort(unique(arrange_data$category),
                                          decreasing = F)),
                           pad = 15,
-                          thickness = 20,
-                          color = my_color[0:15],
+                          thickness = 10,
+                          colorScale = my_color[0:15],
                           line = list(color = 'black', width = 0.5)
                         ),
                         
                         link = list(source = arrange_data$fac_main_cate,
                                     target = arrange_data$fac_cate,
                                     value =  arrange_data$category_pledged,
-                                    label = arrange_data$hoverinfo)
+                                    label = arrange_data$hoverinfo,
+                                    color = "rgba(249, 242, 234, 0.7)")
   ) %>%
     layout(
       title = "Total Pledged(USD) Each Category Get and Distribution to Their Sub Category",
