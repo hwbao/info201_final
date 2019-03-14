@@ -141,12 +141,12 @@ shinyUI(
       icon = icon("star-half-alt"),
       tags$div(
         id = "container", titlePanel(tags$h5("Success Rate")),
-        tags$div(id = "graph_desc", HTML("This interactive timeline provides the information 
-                     about the successful rate for each <b>different category</b> of <i>Kickstarter projects</i> in each years")),
+        
         sidebarLayout(
           sidebarPanel(
             id = "sidebar",
-            
+            tags$div(id = "intro", HTML("This interactive timeline provides the information 
+                     about the <b>successful rate</b> for each <b>different category</b> of <i>Kickstarter projects</i> in each years")),
             sliderInput("year",
               label = "Please choose the year you are interested in",
               min = 2009, max = 2017,
@@ -173,8 +173,14 @@ shinyUI(
         sidebarPanel(
           id = "sidebar",
           tags$h5("Average Goals"),
-          HTML("<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> 
-                               <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>"),
+          tags$div(HTML("This bar graph provides the information about the average goal(USD) 
+          for each main category.  <br/> 
+          Categories like <b>technology</b>, <b>films and videos</b> and <b>games</b> have relatively high average goal
+          while other categories like <b>dance</b>, <b>crafts</b> and <b>music</b> have a relatively lower average goal.
+
+
+ <br/> <br/> <br/> <br/> <br/> 
+<br/> <br/> <br/> <br/> <br/> ")),
           uiOutput("categories")
         ),
 
@@ -192,9 +198,16 @@ shinyUI(
       tags$div(
         id = "sankey",
         titlePanel(tags$h5("Where do the backers' investment go?")),
-
+        tags$div(id = "intro", HTML("This sankey diagram provides the information 
+        about the <b>flow</b> of the backers' investment. 
+        The left side of the graph shows the main category, the right of the graph
+        shows 3 different subcategories that received most amount of investment under each main category.
+        The width of the strips that's connecting each main and sub category represents the amount of investment."
+                                    
+        )),
 
         plotlyOutput("sankey")
+        
       )
     ),
 
@@ -207,6 +220,11 @@ shinyUI(
         sidebarLayout(
           sidebarPanel(
             id = "sidebar",
+            tags$div(id = "intro", HTML("This bar graph provides the information 
+            of the average amount of money that a backer would give to a project 
+            in specific category according to the user's input<br/><br/>"
+                                        
+            )),
             uiOutput("backer_ui")
           ),
 
