@@ -82,3 +82,50 @@ find_rate <- function(data, input_year) {
     )
   return(babble_plot)
 }
+
+line_plot <- function(data, input_sub_cate) {
+  modified_df <- data %>%
+    select(category, state, deadline) %>%
+    mutate(deadline = as.numeric(substring(deadline, 1, 4))) %>%
+    filter(category == input_sub_cate) %>%
+    group_by(deadline) %>%
+    mutate(total_count = n()) %>%
+    filter(state == "successful") %>%
+    mutate(success = n()) %>%
+    mutate(success_rate = round(success / total_count * 100, 1)) %>%
+    select(category, success_rate, deadline) %>%
+    unique(by = deadline) %>%
+    ungroup(deadline) %>%
+    arrange(deadline)
+  
+  p2 <- plot_ly(
+    modified_df,
+    x = ~deadline,
+    y = ~success_rate,
+    type = "scatter",
+    mode = "lines+markers",
+    color = "#C0C0C0",
+    marker = list(color = "#C0C0C0")
+  ) %>% 
+    layout(
+      autosize = T, margin = m,
+      title = paste("Success Rates in Years of", category),
+      font = list(color = "#C0C0C0"),
+      xaxis = list(
+        title = "Years",
+        color = "#C0C0C0", 
+        zerolinewidth = 1,
+        ticklen = 2,
+        gridwidth = 2
+      ),
+      yaxis = list(
+        title = "Success Rates (%)",
+        color = "#C0C0C0",
+        ticklen = 2,
+        gridwidth = 2
+      ),
+      paper_bgcolor = "#010402",
+      plot_bgcolor = "#010402"
+    )
+  return(p2)
+}
