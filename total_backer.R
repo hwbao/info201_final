@@ -13,13 +13,26 @@ draw_sankey_graph <- function(kickstarter) {
   # ungroup() %>%
   #top_n(as.numeric(top), wt=category_pledged)
   
-  my_color <- c("rgb(241, 188, 172)", "rgb(241, 171, 206)", "rgb(223, 172, 240)",
-                "rgb(170, 172, 240)", "rgb(128, 162, 227)", "rgb(167, 129, 226)",
-                "rgb(227, 129, 211)", "rgb(227, 127, 137)", "rgb(202, 84, 133)", 
-                "rgb(183, 87, 202)", "rgb(92, 86, 201)", "rgb(86, 164, 202)",
-                "rgb(54, 179, 178)", "rgb(47, 81, 176)", "rgb(111, 52, 176)",
-                "rgb(177, 50, 144)", "rgb(142, 51, 151)", "rgb(63, 50, 151)",
-                "rgb(49, 110, 151)", "rgb(52, 152, 118)")
+  my_color <- c("rgb(241, 188, 172)", "rgb(241, 188, 172)", "rgb(241, 188, 172)",
+                "rgb(241, 171, 206)", "rgb(241, 171, 206)", "rgb(241, 171, 206)",
+                "rgb(223, 172, 240)", "rgb(223, 172, 240)", "rgb(223, 172, 240)",
+                "rgb(170, 172, 240)", "rgb(170, 172, 240)", "rgb(170, 172, 240)",
+                "rgb(128, 162, 227)", "rgb(128, 162, 227)", "rgb(128, 162, 227)",
+                "rgb(167, 129, 226)", "rgb(167, 129, 226)", "rgb(167, 129, 226)",
+                "rgb(227, 129, 211)", "rgb(227, 129, 211)", "rgb(227, 129, 211)",
+                "rgb(227, 127, 137)", "rgb(227, 127, 137)", "rgb(227, 127, 137)",
+                "rgb(202, 84, 133)", "rgb(202, 84, 133)", "rgb(202, 84, 133)",
+                "rgb(183, 87, 202)", "rgb(183, 87, 202)", "rgb(183, 87, 202)",
+                "rgb(92, 86, 201)", "rgb(92, 86, 201)", "rgb(92, 86, 201)",
+                "rgb(86, 164, 202)", "rgb(86, 164, 202)", "rgb(86, 164, 202)",
+                "rgb(54, 179, 178)", "rgb(54, 179, 178)", "rgb(54, 179, 178)",
+                "rgb(47, 81, 176)", "rgb(47, 81, 176)", "rgb(47, 81, 176)",
+                "rgb(111, 52, 176)","rgb(111, 52, 176)", "rgb(111, 52, 176)",
+                "rgb(177, 50, 144)", "rgb(177, 50, 144)", "rgb(177, 50, 144)",
+                "rgb(142, 51, 151)", "rgb(142, 51, 151)", "rgb(142, 51, 151)",
+                "rgb(63, 50, 151)", "rgb(63, 50, 151)", "rgb(63, 50, 151)",
+                "rgb(49, 110, 151)", "rgb(49, 110, 151)", "rgb(49, 110, 151)",
+                "rgb(52, 152, 118)", "rgb(52, 152, 118)","rgb(52, 152, 118)")
   
   new_data <- kickstarter %>%
     dplyr::filter(main_category != category) %>%
@@ -40,6 +53,8 @@ draw_sankey_graph <- function(kickstarter) {
   arrange_data$fac_cate <- as.numeric(factor(arrange_data$category)) +
     length(unique(arrange_data$main_category)) - 1
   
+  arrange_data$color <- my_color[0:45]
+  
   draw_graph <- plot_ly(type = "sankey", 
                         domain = list(x =  c(0,1), y =  c(0,1)),
                         orientation = "h",
@@ -47,6 +62,7 @@ draw_sankey_graph <- function(kickstarter) {
                         height = 1200,
                         textfont = list(size = 16,
                                         color = "rgb(194, 202, 214)"),
+                        opacity = 0.5,
                         
                         
                         node = list(
@@ -55,18 +71,17 @@ draw_sankey_graph <- function(kickstarter) {
                           label = c(unique(arrange_data$main_category),
                                     sort(unique(arrange_data$category),
                                          decreasing = F)),
-                          pad = 10,
-                          thickness = 15,
-                          color = my_color[0:20],
-                          line = list(color = 'black', width = 0.5)
+                          pad = 15,
+                          thickness = 25,
+                          color = "transparent",
+                          line = list(color = "transparent", width = 0.5)
                         ),
                         
                         link = list(source = arrange_data$fac_main_cate,
                                     target = arrange_data$fac_cate,
                                     value =  arrange_data$category_pledged,
                                     label = arrange_data$hoverinfo,
-                                    line = list(width = 1),
-                                    color = my_color[0:20])
+                                    color = arrange_data$color)
   ) %>%
     layout(
       title = "Total Pledged(USD) Each Category Get and Distribution to Their Sub Category",
@@ -76,8 +91,8 @@ draw_sankey_graph <- function(kickstarter) {
       ),
       xaxis = list(showgrid = T, zeroline = T, showticklabels = F),
       yaxis = list(showgrid = F, zeroline = F, showticklabels = F),
-      plot_bgcolor = "black",
-      paper_bgcolor = "black"
+      plot_bgcolor = "transparent",
+      paper_bgcolor = "transparent"
     )
   return(draw_graph)
 }
