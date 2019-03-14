@@ -25,8 +25,8 @@ find_rate <- function(data, input_year) {
     mutate(success = n()) %>%
     mutate(success_rate = round(success / total_projects * 100, 1)) %>%
     select(main_category, success_rate, total_projects, total_backers, deadline) %>%
-    #ungroup(main_category) %>% 
-    #group_by(deadline) %>% 
+    #ungroup() %>% 
+    #group_by(main_category) %>% 
     unique(by = main_category) %>%
     arrange(deadline)
 
@@ -37,7 +37,7 @@ find_rate <- function(data, input_year) {
     t = 100,
     pad = 4
   )
-  size <- length(unique(modified_df$main_category))
+  #size <- length(unique(modified_df$main_category))
 
   babble_plot <- plot_ly(
     modified_df,
@@ -49,7 +49,7 @@ find_rate <- function(data, input_year) {
     mode = "markers",
     size = ~total_backers,
     color = ~main_category,
-    colors = "Paired",
+    #colors = "Paired",
     sizes = c(
       min(modified_df$total_backers) / 200,
       max(modified_df$total_backers) / 200
@@ -57,12 +57,12 @@ find_rate <- function(data, input_year) {
     marker = list(
       symbol = "circle",
       sizemode = "area",
-      color = my_color[0:size],
+      #color = my_color[0:size],
       line = list(width = 0)
     ),
     hoverinfo = "text",
     legendgroup = ~main_category,
-    text = ~ paste(
+    text = ~paste(
       "Category:", main_category,
       "<br>Success Rate:", success_rate,
       "<br>Amount Projects:", total_projects,
@@ -90,6 +90,9 @@ find_rate <- function(data, input_year) {
       legend = list(font = list(color = "#C0C0C0")),
       paper_bgcolor = "transparent",
       plot_bgcolor = "transparent"
+    ) %>% 
+    animation_slider(
+      currentvalue = list(prefix = "YEAR ", font = list(color = "#C0C0C0"))
     )
   return(babble_plot)
 }
@@ -151,7 +154,7 @@ line_plot <- function(data, input_sub_cate) {
     ) %>% 
     animation_opts(
       frame = 100, 
-      transition = 0, 
+      transition = 0.5, 
       redraw = FALSE
     ) %>%
     animation_slider(
