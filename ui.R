@@ -7,8 +7,7 @@ shinyUI(
   navbarPage(
     
     
-    img(id = "kickstart_logo" , src='ar_white.png', width = "70px",
-                 height = "50px", align = "top"),
+    img(id = "logo" , src='ar_white.png'),
                  theme = shinytheme("cyborg"),
     
     tags$head(
@@ -17,6 +16,16 @@ shinyUI(
             min-height:100%;
             overflow:auto;
       }      
+      .sidebarPanel{
+            background-color: transparent;
+      }
+      #logo {
+            width : 60px;
+            height : 60px;
+            align : top;
+            padding-top: 0;
+            padding-bottom: 20px;
+      }
 
       #snakey {
         position:relative;
@@ -27,7 +36,10 @@ shinyUI(
 
       .navbar { 
             font-family: 'Roboto';
+            font-size: 11pt;
             color: rgb(178, 178, 178) ;
+            height: 80px;
+            padding-top: 15px;
       }
       body {
             min-height:100%;
@@ -89,11 +101,13 @@ shinyUI(
               We have created this website to proudly present our finding about the 
               kickstarter dataset.")
               ,HTML("<p>  &nbsp </p>")
-              ,tags$h5("About us"),
-              img(id = "ar_logo" , src='ar_white.png', width = "60px",
-                  height = "40px", align = "left"),
+              ,img(src='ar_white.png', width="60px", height="40px"),tags$h5("About us"),
               tags$div(id = "intro",
-              "We are Ar Analysis from INFO 201, section BC.")
+              "We are Ar Analysis from INFO 201, section BC. 
+              "),
+              tags$div(id = "intro", "Our group members: "),
+              tags$div(id = "intro", "  -- Haowen Bao,
+                       Zexin Lyu, Ruijun Guo, Yutian Lei")
             
             )
             )
@@ -109,6 +123,8 @@ shinyUI(
                                       min = 2009, max = 2017,
                                       value = 2009
                           ),
+                          HTML("<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> 
+                               <br/> <br/> <br/> <br/> <br/> <br/> <br/>"),
                           uiOutput("line_ui1"),
                           uiOutput("line_ui2")
                           ),
@@ -135,7 +151,7 @@ shinyUI(
              ),
             
             #-------------------------------------------------------------#
-            tabPanel("Pledged Money", icon = icon("dollar-sign"),
+            tabPanel("Pledged Money", icon = icon("location-arrow"),
                      tags$div(id = "snakey",
                      titlePanel(tags$h5("Where do the backers' investment go?")),
                      
