@@ -109,16 +109,12 @@ shinyUI(
                                       min = 2009, max = 2017,
                                       value = 2009
                           ),
-                          selectInput("rate_sub_category",
-                                      label = "Please choose the sub category you are interested in",
-                                      choices = list(
-                                        "All Category" = "category"
-                                      )
-                          )
-                        ),
-                        
+                          uiOutput("line_ui1"),
+                          uiOutput("line_ui2")
+                          ),
                         mainPanel(
-                          plotlyOutput("rate")
+                          plotlyOutput("rate"),
+                          plotlyOutput("line_rate")
                         )
                       )
                       )
