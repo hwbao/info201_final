@@ -11,6 +11,7 @@ num_rows <- function(data) {
   HTML(nrow(data))
 }
 
+# list all the main category for drop down menu
 main_cat_list <- function(data) {
   result <- data %>% 
     select("main_category") %>% 
@@ -19,6 +20,7 @@ main_cat_list <- function(data) {
     pull()
 }
 
+# list all sub category for drop down menu by given main category
 sub_cat_list <- function(data, input_cate) {
   result <- data %>% 
     select("category", "main_category") %>% 
