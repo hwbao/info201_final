@@ -18,15 +18,17 @@ find_rate <- function(data, input_year) {
   modified_df <- data %>%
     select(main_category, state, deadline, backers) %>%
     mutate(deadline = as.numeric(substring(deadline, 1, 4))) %>%
-    group_by(main_category) %>%
-    filter(deadline == input_year) %>%
+    group_by(main_category, deadline) %>%
+    filter(deadline != 2018 || deadline != 2019) %>%
     mutate(total_projects = n(), total_backers = sum(backers)) %>%
     filter(state == "successful") %>%
     mutate(success = n()) %>%
     mutate(success_rate = round(success / total_projects * 100, 1)) %>%
-    select(main_category, success_rate, total_projects, total_backers) %>%
+    select(main_category, success_rate, total_projects, total_backers, deadline) %>%
+    #ungroup(main_category) %>% 
+    #group_by(deadline) %>% 
     unique(by = main_category) %>%
-    arrange(success_rate)
+    arrange(deadline)
 
   m <- list(
     l = 50,
@@ -42,6 +44,7 @@ find_rate <- function(data, input_year) {
     x = ~total_projects,
     y = ~success_rate,
     name = ~main_category,
+    frame = ~deadline,
     type = "scatter",
     mode = "markers",
     size = ~total_backers,
@@ -105,21 +108,30 @@ line_plot <- function(data, input_sub_cate) {
     unique(by = deadline) %>%
     ungroup(deadline) %>%
     arrange(deadline)
-
-
-  p2 <- plot_ly(
-    modified_df,
-    x = ~deadline,
-    y = ~success_rate,
-    type = "scatter",
-    mode = "lines+markers",
-    colors = "rgb(241, 171, 206)",
-    marker = list(color = "rgb(202, 84, 133)")
-  ) %>%
-    layout(
-      autosize = T, margin = m,
-      title = paste("Success Rates in Years of", input_sub_cate),
-      font = list(color = "#C0C0C0"),
+  
+  accumulate_by <- function(dat, var) {
+    var <- lazyeval::f_eval(var, dat)
+    lvls <- plotly:::getLevels(var)
+    dats <- lapply(seq_along(lvls), function(x) {
+      cbind(dat[var %in% lvls[seq(1, x)], ], frame = lvls[[x]])
+    })
+    dplyr::bind_rows(dats)
+  }
+  
+  d <- modified_df %>%
+    filter(deadline >= 2009, success_rate) %>%
+    accumulate_by(~deadline)
+  
+  p2 <- d %>%
+    plot_ly(
+      x = ~deadline, 
+      y = ~success_rate,
+      frame = ~frame, 
+      type = 'scatter',
+      mode = 'lines', 
+      line = list(simplyfy = F, color = "rgb(202, 84, 133)")
+    ) %>% 
+  layout(
       xaxis = list(
         title = "Years",
         color = "#C0C0C0",
@@ -129,12 +141,25 @@ line_plot <- function(data, input_sub_cate) {
       ),
       yaxis = list(
         title = "Success Rates (%)",
+        zerolinewidth = 1,
         color = "#C0C0C0",
         ticklen = 2,
         gridwidth = 1
       ),
       paper_bgcolor = "transparent",
       plot_bgcolor = "transparent"
+    ) %>% 
+    animation_opts(
+      frame = 100, 
+      transition = 0, 
+      redraw = FALSE
+    ) %>%
+    animation_slider(
+      hide = T
+    ) %>%
+    animation_button(
+      x = 1, xanchor = "right", y = 0, yanchor = "bottom"
     )
+  
   return(p2)
 }
