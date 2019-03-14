@@ -109,7 +109,7 @@ line_plot <- function(data, input_sub_cate) {
     type = "scatter",
     mode = "lines+markers",
     colors = "rgb(241, 171, 206)",
-    marker = list(color = "rgb(241, 171, 206)")
+    marker = list(color = "rgb(202, 84, 133)")
   ) %>% 
     layout(
       autosize = T, margin = m,
