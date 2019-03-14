@@ -88,7 +88,7 @@ shinyUI(
               money a backer would be willing to give. 
               We have created this website to proudly present our finding about the 
               kickstarter dataset.")
-              ,HTML("/n")
+              ,HTML("<p>/n</p>")
               ,tags$h5("About us"),
               img(id = "ar_logo" , src='ar_white.png', width = "80px",
                   height = "60px", align = "left"),

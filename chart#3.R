@@ -109,7 +109,7 @@ line_plot <- function(data, input_sub_cate) {
   ) %>% 
     layout(
       autosize = T, margin = m,
-      title = paste("Success Rates in Years of", category),
+      title = paste("Success Rates in Years of", input_sub_cate),
       font = list(color = "#C0C0C0"),
       xaxis = list(
         title = "Years",
@@ -124,8 +124,8 @@ line_plot <- function(data, input_sub_cate) {
         ticklen = 2,
         gridwidth = 2
       ),
-      paper_bgcolor = "#010402",
-      plot_bgcolor = "#010402"
+      paper_bgcolor = "transparent",
+      plot_bgcolor = "transparent"
     )
   return(p2)
 }
