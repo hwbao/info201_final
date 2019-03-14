@@ -88,8 +88,10 @@ shinyUI(
               money a backer would be willing to give. 
               We have created this website to proudly present our finding about the 
               kickstarter dataset.")
-              
+              ,HTML("<p>/n</p>")
               ,tags$h5("About us"),
+              img(id = "ar_logo" , src='ar_white.png', width = "80px",
+                  height = "60px", align = "left"),
               tags$div(id = "intro",
               "We are Ar Analysis from INFO 201, section BC.")
             
@@ -107,17 +109,12 @@ shinyUI(
                                       min = 2009, max = 2017,
                                       value = 2009
                           ),
-                          selectInput("rate_sub_category",
-                                      label = "Please choose the sub category you are interested in",
-                                      choices = list(
-                                        "All Category" = "category"
-                                      )
-                          )
-                          
-                        ),
-                        
+                          uiOutput("line_ui1"),
+                          uiOutput("line_ui2")
+                          ),
                         mainPanel(
-                          plotlyOutput("rate")
+                          plotlyOutput("rate"),
+                          plotlyOutput("line_rate")
                         )
                       )
                       )
@@ -140,7 +137,7 @@ shinyUI(
             #-------------------------------------------------------------#
             tabPanel("Pledged Money", icon = icon("dollar-sign"),
                      tags$div(id = "snakey",
-                     titlePanel(tags$h5("Where")),
+                     titlePanel(tags$h5("Where do the backers' investment go?")),
                      sidebarLayout(
                        sidebarPanel(
                        sliderInput("top_project", 

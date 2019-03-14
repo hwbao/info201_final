@@ -19,4 +19,14 @@ main_cat_list <- function(data) {
     pull()
 }
 
+sub_cat_list <- function(data, input_cate) {
+  result <- data %>% 
+    select("category", "main_category") %>% 
+    filter(main_category == input_cate) %>% 
+    arrange(category) %>% 
+    unique(by = category) %>% 
+    select(category) %>% 
+    pull()
+}
+
 
