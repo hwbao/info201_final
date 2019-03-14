@@ -153,13 +153,14 @@ shinyUI(
              ),
              #-------------------------------------------------------------#
              tabPanel("Goals", icon = icon("dollar-sign"),
-                      titlePanel(
-                       
-                        tags$h5("Average Goals")),
+                      
                         sidebarLayout(
                           
                           sidebarPanel(id = "sidebar",
-                            uiOutput("categories")
+                              tags$h5("Average Goals"),
+                              HTML("<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> 
+                               <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>"),
+                              uiOutput("categories")
                           ),
                           
                           mainPanel(

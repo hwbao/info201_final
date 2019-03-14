@@ -84,7 +84,7 @@ sub_category_analysis <- function(data, chosen_main_category){
                               opacity = 1,
                               line = list(width = 0) )) %>%
     layout(autosize = T, margin = m,
-           title = 'Mean Goal for Sub Categories In Each Main Category',
+           title = paste('Mean Goal for Sub Categories In', chosen_main_category),
            line = list(width = 0),
            xaxis = list(title = "Sub Category"),
            yaxis = list(showgrid = FALSE, title = "Sub Category Goal (USD)"),
