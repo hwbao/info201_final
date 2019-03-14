@@ -5,6 +5,14 @@ library(plotly)
 # Read the data about kickstarter and convert it into a dataframe
 kickstarter <- read.csv("data/ks_projects_201801.csv", stringsAsFactors = F)
 
+my_color <- c("rgb(232, 129, 129)", "rgb(232, 206, 129)", "rgb(232, 211, 129)",
+              "rgb(216, 232, 129)", "rgb(166, 232, 129)", "rgb(129, 232, 180)",
+              "rgb(232, 129, 214)",
+              "rgb(129, 228, 232)", "rgb(129, 182, 232)", "rgb(129, 146, 232)", 
+              "rgb(142, 232, 129)", "rgb(158, 129, 232)", "rgb(185, 129, 232)", 
+              "rgb(195, 129, 232)", "rgb(218, 129, 232)",
+              "rgb(232, 129, 173)", "rgb(232, 129, 183)", "rgb(232, 129, 214)")
+
 draw_sankey_graph <- function(kickstarter) {
   #new_data <- kickstarter %>%
   # dplyr::filter(main_category != category) %>%
@@ -38,7 +46,8 @@ draw_sankey_graph <- function(kickstarter) {
                         valueformat = ".0f",
                         valuesuffix = "TWh",
                         width = 1080,
-                        height = 800,
+                        height = 1000,
+                        textfont = list(size = 16),
                         
                         node = list(
                           # label = c(new_data$fac_main_cate, new_data$fac_cate),
@@ -46,16 +55,15 @@ draw_sankey_graph <- function(kickstarter) {
                           label = c(unique(arrange_data$main_category),
                                     sort(unique(arrange_data$category),
                                          decreasing = F)),
-                          color = "#D175B7",
                           pad = 15,
                           thickness = 20,
-                          line = list(color = "black", width = 0.5)
+                          color = my_color[0:15],
+                          line = list(color = 'black', width = 0.5)
                         ),
                         
                         link = list(source = arrange_data$fac_main_cate,
                                     target = arrange_data$fac_cate,
                                     value =  arrange_data$category_pledged,
-                                    color = "#4BC3B5",
                                     label = arrange_data$hoverinfo)
   ) %>%
     layout(
@@ -66,8 +74,8 @@ draw_sankey_graph <- function(kickstarter) {
       ),
       xaxis = list(showgrid = T, zeroline = T),
       yaxis = list(showgrid = F, zeroline = F),
-      plot_bgcolor = "#010402",
-      paper_bgcolor = "#010402"
+      plot_bgcolor = "transparent",
+      paper_bgcolor = "transparent"
     )
   return(draw_graph)
 }
